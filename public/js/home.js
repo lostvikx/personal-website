@@ -24,12 +24,23 @@ const isList = (line) => {
 
 const header = (line) => {
 
+  let header = "";
+
   const [headerType, ...text] = line.split(" ");
   
   const headerText = text.join(" ");
   const id = headerText.replace(/[\W_]+/g, " ").trim().toLowerCase().split(" ").join("-");
 
-  return `<h${headerType.length} id="${id}"><a href="${winLocRef}#${id}" class="topic">${headerText}</a></h${headerType.length}>`;
+  // TODO: try to add hr after header
+  // if (headerType.length > 2) {
+  //   header += `<h${headerType.length} id="${id}"><a href="${winLocRef}#${id}" class="topic">${headerText}</a></h${headerType.length}>`;
+  // } else {
+  //   header += `<h${headerType.length} id="${id}"><a href="${winLocRef}#${id}" class="topic">${headerText}</a></h${headerType.length}><hr />`;
+  // }
+
+  header += `<h${headerType.length} id="${id}">${headerText}</h${headerType.length}>`;
+
+  return header;
 
 }
 
@@ -76,9 +87,11 @@ for (const [i, line] of mdText.entries()) {
       html += "</ul>"
     }
   }
+
+  
   
 
 }
 
-console.log(html);
+// console.log(html);
 article.innerHTML = html;

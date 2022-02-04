@@ -42,6 +42,7 @@ nav {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  margin: 0.5rem 1rem;
 }
 
 .nav-link {
@@ -50,9 +51,27 @@ nav {
 
 /* article */
 #article {
-  margin: 2rem 0;
+  margin: 2rem 1rem;
 }
 
 .topic {
   color: var(--text);
+}
+
+#article h1 {
+  margin: 0 0 1.5rem 0;
+}
+
+#article h2 {
+  margin: 1.2rem 0;
+}
+
+#article h3 {
+  margin: 1rem 0;
+}
+
+#article ul {
+  list-style-position: inside;
+  list-style-type: circle;
+  margin: 0.25rem 0;
 }
