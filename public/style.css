@@ -2,7 +2,7 @@
   --bg-color: ghostwhite;
   --link: #2064b1;
   --text: rgb(20, 20, 20);
-  --crimson: crimson;
+  --crimson: rgb(215, 80, 110);
 }
 
 * {
@@ -24,11 +24,14 @@ body {
 a {
   text-decoration: none;
   color: var(--link);
+}
+
+nav a {
   font-weight: 500;
   font-size: 1.2rem;
 }
 
-a:hover {
+nav a:hover {
   color: var(--crimson);
 }
 
@@ -42,5 +45,14 @@ nav {
 }
 
 .nav-link {
-  font-size: 1rem;
+  font-size: 1.2rem;
+}
+
+/* article */
+#article {
+  margin: 2rem 0;
+}
+
+.topic {
+  color: var(--text);
 }
