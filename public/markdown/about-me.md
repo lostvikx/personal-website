@@ -2,6 +2,8 @@
  
 My name is Vikram Singh Negi, a self-taught developer who likes to hack his laptop. The way you move is so good. This is because ReactJS has states, we used it to store previous move data (record history).
 
+Holly shit!
+
 Programming is my true calling!
 
 ## Weather & Air Quality
@@ -14,7 +16,7 @@ This project was made possible by multiple diffrent JavaScript libraries and pub
 * Leaflet.js
 * Express.js
 * [OpenWeatherMap](https://openweathermap.org/)
-* [OpenAQ](https://openaq.org/#/)
+* [OpenAQ](https://openaq.org/)
 
 The website is a simple way to get weather and air quality data from a number of different locations around the globle.
 

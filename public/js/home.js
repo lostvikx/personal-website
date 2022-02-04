@@ -44,11 +44,25 @@ const header = (line) => {
 
 }
 
+const createLink = (line) => {
+  const found = line.match(/\[(\w+)\]\((.+)\)/);
+
+  if (found !== null) {
+    const [ fullMatch, text, href ] = found;
+    return `<a href="${href}" target="_blank">${text}</a>`;
+  } else {
+    return null;
+  }
+
+}
+
 const createList = (line, init=true) => {
 
   let list = "";
   const [bullet, ...text] = line.split(" ");
-  const listItem = text.join(" ");
+  let listItem = text.join(" ");
+
+  listItem = createLink(listItem) || listItem;
 
   if (init) {
     list += "<ul>";
@@ -79,6 +93,7 @@ for (const [i, line] of mdText.entries()) {
     } catch (error) {
       html += createList(line);
     }
+
     try {
       if (!isList(mdText[i + 1])) {
         html += "</ul>"
@@ -87,8 +102,6 @@ for (const [i, line] of mdText.entries()) {
       html += "</ul>"
     }
   }
-
-  
   
 
 }
