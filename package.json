@@ -1,0 +1,20 @@
+{
+  "name": "personal-website",
+  "version": "1.0.0",
+  "description": "A personal website!",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "personal",
+    "website",
+    "nodejs",
+    "html"
+  ],
+  "author": "Vikram S. Negi",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
