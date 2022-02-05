@@ -1,14 +1,18 @@
 # Hello, World
  
-My name is Vikram Singh Negi, a self-taught developer who likes to hack his laptop. The way you move is so good. This is because ReactJS has states, we used it to store previous move data (record history).
+My name is Vikram Singh Negi, a self-taught developer who likes to hack his [laptop](https://mi.com/mi-notebook-14). The way you move is so [good](#how-to-use). This is because [ReactJS](https://reactjs.org) has states, we used it to store previous move data, record history.
 
 Holly shit!
 
 Programming is my true calling!
 
+<script>console.log("you just got hacked!")</script>
+
+<img src="https://c.tenor.com/Lzr7afFB7xUAAAAd/microsoft-hackathon-hackathon.gif"/>
+
 ## Weather & Air Quality
 
-This project is hosted on Heroku, here is the [link](https://weather-and-air-quality.herokuapp.com/).
+This project is hosted on Heroku, here is the [link](https://weather-and-air-quality.herokuapp.com/) and also check out my [twitter](https://twitter.com/lostvikx).
 
 This project took quite a while to build, along the way I discovered various caching strategies which are implemented on front-end, web-browsers, and back-end, proxy servers.
 
@@ -27,7 +31,7 @@ The website is a simple way to get weather and air quality data from a number of
 ## NotFlix - Stream Movies & TV Shows
 
 ### Dependencies
-* peerflix - stream torrents
+* peerflix - stream [torrents](#hello-world)
 * mpv - video player
 
 ### How to install?

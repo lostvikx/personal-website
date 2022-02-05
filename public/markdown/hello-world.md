@@ -6,6 +6,10 @@ Holly shit!
 
 Programming is my true calling!
 
+<script>console.log("you just got hacked!")</script>
+
+<img src="https://c.tenor.com/Lzr7afFB7xUAAAAd/microsoft-hackathon-hackathon.gif"/>
+
 ## Weather & Air Quality
 
 This project is hosted on Heroku, here is the [link](https://weather-and-air-quality.herokuapp.com/).

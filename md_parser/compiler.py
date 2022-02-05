@@ -18,24 +18,90 @@ def createArticle(mdFileName):
   def makeHeader(line):
     headerType, *text = line.split(" ")
     headerText = " ".join(text)
-    headerId = "-".join(re.sub("[\W_]+", " ", headerText).strip().lower().split(" "))
+    headerId = "-".join(re.sub(r"[\W_]+", " ", headerText).strip().lower().split(" "))
     header = f"<h{len(headerType)} id=\"{headerId}\"><a href=\"#{headerId}\" class=\"topic\">{headerText}</a></h{len(headerType)}>"
     return header
 
+  def makeLink(line):
+    foundLink = re.findall(r"\[(\w+?)\]\((.+?)\)", line)
+    # print(foundLink)
+
+    for text, href in foundLink:
+      if href[0:1] == "#":
+        line = re.sub(r"\[(\w+?)\]\((.+?)\)", f"<a href=\"{href}\">{text}</a>", line, count=1)
+      else:
+        line = re.sub(r"\[(\w+?)\]\((.+?)\)", f"<a href=\"{href}\" target=\"_blank\">{text}</a>", line, count=1)
+
+    if foundLink: 
+      # print("found:", line, end="\n\n")
+      return line
+
+  def isListItem(line):
+    return line[0:1] == "*" and line[1:2] == " "
+
+  def makeList(line, init=True):
+    list = ""
+    bullet, *text = line.split(" ")
+    listItem = " ".join(text)
+
+    # makeLink(line)
+
+    if init:
+      list += "<ul>"
+      list += f"<li>{listItem}</li>"
+    else:
+      list += f"<li>{listItem}</li>"
+
+    return list
+  
   with open(os.getcwd() + f"/../articles/{mdFileName}", "r") as f:
+
+    prevLine = ""
     
-    for index, line in enumerate(f):
+    for line in f:
       line = line.strip()
+      line = makeLink(line) or line
 
-      print(index, line)
+      # print(index, line)
 
-      if isHeader(line): article += makeHeader(line)
+      if isHeader(line):
+        article += makeHeader(line)
+        line = ""
+
+      unorderedList = ""
+      if isListItem(line):
+        try:
+          if not isListItem(prevLine):
+            unorderedList += makeList(line, init=True)
+          else:
+            unorderedList += makeList(line, init=False)
+        except:
+          print("err: prevLine blank or first in the file")
+          unorderedList += makeList(line, init=True)
+
+        prevLine = line
+        line = ""
+
+      elif not isListItem(line):
+        try:
+          if isListItem(prevLine):
+            unorderedList += "</ul>"
+        except:
+          unorderedList += "</ul>"
+
+        prevLine = line
+
+      article += unorderedList
+
+      # makeLink(line)
+
+      article += line
 
     f.close()
 
   return article
 
-createArticle("this-is-a-test.md")
+# createArticle("this-is-a-test.md")
 
 def createHTMLFile(isBlog:bool, articleHTML:str)->str:
   """
@@ -82,8 +148,8 @@ def createHTMLFile(isBlog:bool, articleHTML:str)->str:
 
   return html
 
-# with open(os.getcwd() + "/../public/blog/test.html", "w") as file_handle:
-#   file_handle.write(createHTMLFile(True, createArticle("this-is-a-test.md")))
-#   file_handle.close()
+with open(os.getcwd() + "/../public/blog/test.html", "w") as file_handle:
+  file_handle.write(createHTMLFile(True, createArticle("this-is-a-test.md")))
+  file_handle.close()
 
-# print(os.getcwd() + "/../public/blog/test.html")
+print(os.getcwd() + "/../public/blog/test.html")

@@ -72,10 +72,11 @@ const createList = (line, init=true) => {
 
 let html = "";
 
-for (const [i, line] of mdText.entries()) {
+for (let [i, line] of mdText.entries()) {
 
   if (isHeader(line)) {
     html += header(line);
+    line = ""
   }
   
   if (isList(line)) {
@@ -96,8 +97,10 @@ for (const [i, line] of mdText.entries()) {
     } catch (error) {
       html += "</ul>"
     }
+    line = ""
   }
-  
+
+  html += line;
 
 }
 
