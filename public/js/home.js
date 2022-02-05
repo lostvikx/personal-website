@@ -5,7 +5,7 @@ const winLocRef = window.location.href;
 
 const fetchAbout = async () => {
 
-  const res = await fetch("./markdown/about-me.md");
+  const res = await fetch("./markdown/hello-world.md");
   const data = await res.text();
 
   return data;
@@ -32,12 +32,6 @@ const header = (line) => {
   const id = headerText.replace(/[\W_]+/g, " ").trim().toLowerCase().split(" ").join("-");
 
   // TODO: try to add hr after header
-  // if (headerType.length > 2) {
-  //   header += `<h${headerType.length} id="${id}"><a href="${winLocRef}#${id}" class="topic">${headerText}</a></h${headerType.length}>`;
-  // } else {
-  //   header += `<h${headerType.length} id="${id}"><a href="${winLocRef}#${id}" class="topic">${headerText}</a></h${headerType.length}><hr />`;
-  // }
-
   header += `<h${headerType.length} id="${id}">${headerText}</h${headerType.length}>`;
 
   return header;
