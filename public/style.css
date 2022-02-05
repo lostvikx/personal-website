@@ -54,8 +54,14 @@ nav {
   margin: 2rem 1rem;
 }
 
+/* all headers class */
 .topic {
   color: var(--text);
+}
+
+.topic:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--text);
 }
 
 #article h1 {

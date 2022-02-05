@@ -2,6 +2,7 @@
 
 const article = document.getElementById("article");
 const winLocRef = window.location.href;
+console.log(winLocRef)
 
 const fetchAbout = async () => {
 
