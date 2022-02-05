@@ -1,28 +1,11 @@
-#!/usr/bin/env python3
-
-import os
-
-def createHTML(publicDir):
-  """
-  Params: publicDir: boolean | should the page be in public dir or sub-dir
-
-  Returns: None | Outputs an HTML file.
-  """
-
-  pathToFiles = {
-    "subDirStyle": "../style.css",
-    "style": "../style.css",
-    "subDirJs": "../js/main.js",
-  }
-
-  html = f"""<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>lostvikx | Home</title>
-  <link rel="stylesheet" href="{pathToFiles["subDirStyle"]}">
+  <link rel="stylesheet" href="../style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -40,16 +23,7 @@ def createHTML(publicDir):
 
   <footer></footer>
 
-  <script src="{pathToFiles["subDirJs"]}" type="module"></script>
+  <script src="../js/main.js" type="module"></script>
 </body>
 </html>
-  """
-
-  return html
-
-# print(createHTML(True))
-with open(os.getcwd() + "/../public/blog/test.html", "w") as file_handle:
-  file_handle.write(createHTML(True))
-  file_handle.close()
-
-# print(os.getcwd() + "/../public/blog/test.html")
+  
