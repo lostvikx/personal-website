@@ -25,6 +25,10 @@ app.get("/github", (req, res) => {
   res.redirect("https://github.com/lostvikx");
 });
 
+app.get("/blog/posts", (req, res) => {
+  res.redirect("/blog");
+});
+
 // 404 Page
 app.get("*", (req, res) => {
 

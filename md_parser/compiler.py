@@ -197,8 +197,8 @@ def createHTMLFile(isBlog:bool, articleHTML:str)->str:
   Returns: returns html string
   """
 
-  stylePath = "../style.css"
-  javascriptPath = "../js/main.js"
+  stylePath = "../../style.css"
+  javascriptPath = "../../js/main.js"
 
   if not isBlog:
     stylePath = stylePath[1:]
@@ -212,8 +212,8 @@ def createHTMLFile(isBlog:bool, articleHTML:str)->str:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>lostvikx | Home</title>
   <link rel="stylesheet" href="{stylePath}">
-  <link rel="stylesheet" href="../css/dark.min.css">
-  <script src="../js/highlight.min.js"></script>
+  <link rel="stylesheet" href="../../css/dark.min.css">
+  <script src="../../js/highlight.min.js"></script>
 </head>
 <body>
 
@@ -234,8 +234,8 @@ def createHTMLFile(isBlog:bool, articleHTML:str)->str:
 
   return html
 
-with open(os.getcwd() + "/../public/blog/test.html", "w") as file_handle:
-  file_handle.write(createHTMLFile(True, createArticle("this-is-a-test.md")))
+with open(os.getcwd() + "/../public/blog/posts/fintech-info.html", "w") as file_handle:
+  file_handle.write(createHTMLFile(True, createArticle("fintech-info.md")))
   file_handle.close()
 
 print(os.getcwd() + "/../public/blog/test.html")
