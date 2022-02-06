@@ -1,9 +1,10 @@
 :root {
-  --text: rgb(255, 255, 255);
-  --link: #3392ff;
-  --bg-color: rgb(22, 21, 21);
-  --pink: rgb(255, 91, 126);
+  --text: #f3f3f3;
+  --blue: #00bcd4;
+  --bg-color: #202124;
+  --pink: #ff4081;
   --neon: #00FF00;
+  --yellow: #FFFF00;
 }
 
 * {
@@ -12,19 +13,24 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   max-width: 700px;
   margin: 0 auto;
   padding: 1em;
   background-color: var(--bg-color);
   color: var(--text);
   font-weight: 400;
+  line-height: 1,6;
 }
 
 a {
   text-decoration: none;
-  color: var(--link);
+  color: var(--pink);
 }
 
 nav a {
@@ -33,7 +39,7 @@ nav a {
 }
 
 nav a:hover {
-  color: var(--neon);
+  color: var(--yellow);
 }
 
 /* navbar */
@@ -44,7 +50,7 @@ nav {
   align-items: center;
   gap: 1rem;
   margin: 0.5rem 1rem 0;
-  color: var(--pink);
+  color: var(--blue);
 }
 
 .nav-link {
@@ -68,14 +74,17 @@ nav {
 
 #article h1 {
   padding: 1em 0 0.9em;
+  font-size: 2rem;
 }
 
 #article h2 {
   padding: 0.75em 0 0.65em;
+  font-size: 1.5rem;
 }
 
 #article h3 {
   padding: 0.5em 0 0.40em;
+  font-size: 1.25rem;
 }
 
 #article ul {
@@ -90,13 +99,14 @@ nav {
 }
 
 #article img {
-  width: 100%;
-  /* max-width: 400px; */
+  max-width: 100%;
+  display: block;
+  margin: 1rem auto;
+  border-radius: 5px;
 }
 
 code {
-  color: var(--neon);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   border-radius: 5px;
 }
 
@@ -118,3 +128,4 @@ code {
   border-radius: 5px;
   background: rgba(0, 0, 0, 0);
 }
+

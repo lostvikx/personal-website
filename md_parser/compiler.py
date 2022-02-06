@@ -36,6 +36,24 @@ def createArticle(mdFileName):
       # print("found:", line, end="\n\n")
       return line
 
+  def makeItalic(line):
+    foundItalic = re.findall(r"\*(.+?)\*", line)
+    
+    for text in foundItalic:
+      line = re.sub(r"\*(.+?)\*", f"<em>{text}</em>", line, count=1)
+    
+    if foundItalic:
+      return line
+
+  def makeBold(line):
+    foundBold = re.findall(r"\*\*(.+?)\*\*", line)
+    
+    for text in foundBold:
+      line = re.sub(r"\*\*(.+?)\*\*", f"<strong>{text}</strong>", line, count=1)
+    
+    if foundBold:
+      return line
+
   def isListItem(line):
     return line[0:1] == "*" and line[1:2] == " "
 
@@ -77,10 +95,16 @@ def createArticle(mdFileName):
     
     return codeBlock
   
+  def isImg(line):
+    return line[0:1] == "!"
+  
+  def makeImg(line):
+    text, imgLink = re.findall(r"\!\[(.+)\]\((.+)\)", line)[0]
+    return f"<img src=\"{imgLink}\" alt=\"{text}\" />"
+  
   with open(os.getcwd() + f"/../articles/{mdFileName}", "r") as f:
 
     prevLine = ""
-    paraCheck = ""
     inCodeBlock = False
     
     for line in f:
@@ -88,6 +112,8 @@ def createArticle(mdFileName):
       if not inCodeBlock: line = line.strip()
 
       line = makeLink(line) or line
+      line = makeBold(line) or line
+      line = makeItalic(line) or line
       line = makeCode(line) or line
 
       # print(index, line)
@@ -139,6 +165,10 @@ def createArticle(mdFileName):
 
       article += codeBlock
 
+      if isImg(line):
+        article += makeImg(line)
+        line = ""
+
       if line != "":
         line = f"<p>{line}</p>"
 
@@ -172,9 +202,6 @@ def createHTMLFile(isBlog:bool, articleHTML:str)->str:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>lostvikx | Home</title>
   <link rel="stylesheet" href="{stylePath}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/dark.min.css">
   <script src="../js/highlight.min.js"></script>
 </head>

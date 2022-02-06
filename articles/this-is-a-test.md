@@ -1,6 +1,8 @@
 # Hello, World
  
-My `name` is Vikram Singh Negi, a self-taught `developer` who likes to hack his [laptop](https://mi.com/mi-notebook-14). The way you move is so [good](#how-to-use). This is because [ReactJS](https://reactjs.org) has states, we used it to store previous move data, record history.
+My `name` is **Vikram Singh Negi**, a self-taught `developer` who likes to hack his [laptop](https://mi.com/mi-notebook-14). The way you **move** is so [good](#how-to-use). This is because [ReactJS](https://reactjs.org) has states, we used it to store previous move data, record history.
+
+![An image for me!](https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-cat-wearing-sunglasses-while-sitting-royalty-free-image-1571755145.jpg)
 
 ```python
 def makeCode(line):
@@ -14,17 +16,21 @@ def makeCode(line):
 
 Holly shit!
 
-Programming is my true calling!
-```javascript
-<script>console.log("you just got hacked!")</script>
+Programming is my true calling, Vikram S. Negi!
 
-<img src="https://c.tenor.com/Lzr7afFB7xUAAAAd/microsoft-hackathon-hackathon.gif"/>
+```html
+<script>
+  if (os === "linux") {
+    hackerman++;
+    console.log("you just got hacked!");
+  }
+</script>
 ```
 ## Weather & Air Quality
 
 This project is hosted on Heroku, here is the [link](https://weather-and-air-quality.herokuapp.com/) and also check out my [twitter](https://twitter.com/lostvikx).
 
-This project took quite a while to build, along the way I discovered various caching strategies which are implemented on front-end, web-browsers, and back-end, proxy servers.
+This project took quite a while to *build*, along the way I discovered various caching **strategies** which are [implemented](#) on front-end, web-browsers, and back-end, *proxy* servers.
 
 This project was made possible by multiple diffrent JavaScript libraries and public APIs.
 
@@ -33,12 +39,7 @@ This project was made possible by multiple diffrent JavaScript libraries and pub
 * [OpenWeatherMap](https://openweathermap.org/)
 * [OpenAQ](https://openaq.org/)
 
-The website is a simple way to get weather and air quality data from a number of different locations around the globe.
-
-```html
-<h1>Hello Guys!</h1>
-<script>console.log("you got hacked boi!")</script>
-```
+The ***website is a simple way to get*** weather and air quality data from a number of different locations around the globe.
 
 1. hello
 2. this is me
@@ -51,26 +52,11 @@ The website is a simple way to get weather and air quality data from a number of
 * mpv - video player
 
 ### How to install?
-* First install the dependencies.
-1. Peerflix
 ```bash
 ~ $ sudo npm install -g peerflix
 ```
-2. mpv - Video Player
 ```bash
 ~ $ sudo apt install mpv
-```
-* Then copy & paste notflix file inside `.local/bin/` directory.
-```bash
-~/Download/notflix $ cp notflix ~/.local/bin/
-```
-* Change directory to `.local/bin/`.
-```bash
-~/Download/notflix $ cd ~/.local/bin/
-```
-* Now make the `notflix` file an executable.
-```bash
-~/.local/bin $ chmod +x notflix
 ```
 
 ### How to use?
