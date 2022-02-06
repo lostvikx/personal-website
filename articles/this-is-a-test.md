@@ -1,6 +1,16 @@
 # Hello, World
  
-My name is Vikram Singh Negi, a self-taught developer who likes to hack his [laptop](https://mi.com/mi-notebook-14). The way you move is so [good](#how-to-use). This is because [ReactJS](https://reactjs.org) has states, we used it to store previous move data, record history.
+My `name` is Vikram Singh Negi, a self-taught `developer` who likes to hack his [laptop](https://mi.com/mi-notebook-14). The way you move is so [good](#how-to-use). This is because [ReactJS](https://reactjs.org) has states, we used it to store previous move data, record history.
+
+```python
+def makeCode(line):
+  foundCode = re.findall(r"\`(\w+?)\`", line)
+  for text in foundCode:
+    line = re.sub(r"\`(\w+?)\`", f"<code>{text}</code>", line, count=1)
+
+  if foundCode:
+    return line
+```
 
 Holly shit!
 
@@ -22,7 +32,12 @@ This project was made possible by multiple diffrent JavaScript libraries and pub
 * [OpenWeatherMap](https://openweathermap.org/)
 * [OpenAQ](https://openaq.org/)
 
-The website is a simple way to get weather and air quality data from a number of different locations around the globle.
+The website is a simple way to get weather and air quality data from a number of different locations around the globe.
+
+```html
+<h1>Hello Guys!</h1>
+<script>console.log("you got hacked boi!")</script>
+```
 
 1. hello
 2. this is me

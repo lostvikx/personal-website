@@ -86,3 +86,8 @@ nav {
   width: 50%;
   /* max-width: 400px; */
 }
+
+code {
+  color: var(--crimson);
+  font-size: 0.8rem;
+}
