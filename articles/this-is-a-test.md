@@ -15,11 +15,11 @@ def makeCode(line):
 Holly shit!
 
 Programming is my true calling!
-
+```javascript
 <script>console.log("you just got hacked!")</script>
 
 <img src="https://c.tenor.com/Lzr7afFB7xUAAAAd/microsoft-hackathon-hackathon.gif"/>
-
+```
 ## Weather & Air Quality
 
 This project is hosted on Heroku, here is the [link](https://weather-and-air-quality.herokuapp.com/) and also check out my [twitter](https://twitter.com/lostvikx).
@@ -27,6 +27,7 @@ This project is hosted on Heroku, here is the [link](https://weather-and-air-qua
 This project took quite a while to build, along the way I discovered various caching strategies which are implemented on front-end, web-browsers, and back-end, proxy servers.
 
 This project was made possible by multiple diffrent JavaScript libraries and public APIs.
+
 * Leaflet.js
 * Express.js
 * [OpenWeatherMap](https://openweathermap.org/)
@@ -50,29 +51,24 @@ The website is a simple way to get weather and air quality data from a number of
 * mpv - video player
 
 ### How to install?
-First install the dependencies.
-
-Peerflix
+* First install the dependencies.
+1. Peerflix
 ```bash
 ~ $ sudo npm install -g peerflix
 ```
-
-mpv - Video Player
+2. mpv - Video Player
 ```bash
 ~ $ sudo apt install mpv
 ```
-
-Then copy & paste notflix file inside `.local/bin/` directory.
+* Then copy & paste notflix file inside `.local/bin/` directory.
 ```bash
 ~/Download/notflix $ cp notflix ~/.local/bin/
 ```
-
-Change directory to `.local/bin/`.
+* Change directory to `.local/bin/`.
 ```bash
 ~/Download/notflix $ cd ~/.local/bin/
 ```
-
-Now make the `notflix` file an executable.
+* Now make the `notflix` file an executable.
 ```bash
 ~/.local/bin $ chmod +x notflix
 ```
@@ -82,3 +78,5 @@ Always use double quotes.
 ```bash
 ~ $ notflix "movie name"
 ```
+
+> I hope you are doing alright.

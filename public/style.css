@@ -1,8 +1,9 @@
 :root {
-  --bg-color: ghostwhite;
-  --link: #2064b1;
-  --text: rgb(20, 20, 20);
-  --crimson: rgb(215, 80, 110);
+  --text: rgb(255, 255, 255);
+  --link: #3392ff;
+  --bg-color: rgb(22, 21, 21);
+  --pink: rgb(255, 91, 126);
+  --neon: #00FF00;
 }
 
 * {
@@ -13,7 +14,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
   padding: 1em;
   background-color: var(--bg-color);
@@ -32,7 +33,7 @@ nav a {
 }
 
 nav a:hover {
-  color: var(--crimson);
+  color: var(--neon);
 }
 
 /* navbar */
@@ -43,10 +44,11 @@ nav {
   align-items: center;
   gap: 1rem;
   margin: 0.5rem 1rem 0;
+  color: var(--pink);
 }
 
 .nav-link {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
 }
 
 /* article */
@@ -65,29 +67,54 @@ nav {
 }
 
 #article h1 {
-  padding: 1.5rem 0;
+  padding: 1em 0 0.9em;
 }
 
 #article h2 {
-  padding: 1.2rem 0;
+  padding: 0.75em 0 0.65em;
 }
 
 #article h3 {
-  padding: 1rem 0;
+  padding: 0.5em 0 0.40em;
 }
 
 #article ul {
-  list-style-position: inside;
+  /* list-style-position: inside; */
   list-style-type: circle;
-  margin: 0.25rem 0;
+  padding: 0.25em 0;
+  margin: 0 1rem;
+}
+
+#article ul li {
+  padding: 0.25em;
 }
 
 #article img {
-  width: 50%;
+  width: 100%;
   /* max-width: 400px; */
 }
 
 code {
-  color: var(--crimson);
-  font-size: 0.8rem;
+  color: var(--neon);
+  font-size: 0.85rem;
+  border-radius: 5px;
+}
+
+#article p {
+  font-size: 1rem;
+  padding: 0.4em 0;
+}
+
+#article pre {
+  padding: 0.4em 0;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-corner {
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0);
 }

@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="../css/dark.min.css">
+  <script src="../js/highlight.min.js"></script>
 </head>
 <body>
 
@@ -21,22 +21,25 @@
     <div class="nav-link">[ <a href="/radio">Radio</a> ]</div>
   </nav>
 
-  <div id="article"><h1 id="hello-world"><a href="#hello-world" class="topic">Hello, World</a></h1>My <code>name</code> is Vikram Singh Negi, a self-taught <code>developer</code> who likes to hack his <a href="https://mi.com/mi-notebook-14" target="_blank">laptop</a>. The way you move is so <a href="#how-to-use">good</a>. This is because <a href="https://reactjs.org" target="_blank">ReactJS</a> has states, we used it to store previous move data, record history.<pre><code class="language-python">def makeCode(line):
+  <div id="article"><h1 id="hello-world"><a href="#hello-world" class="topic">Hello, World</a></h1><p>My <code>name</code> is Vikram Singh Negi, a self-taught <code>developer</code> who likes to hack his <a href="https://mi.com/mi-notebook-14" target="_blank">laptop</a>. The way you move is so <a href="#how-to-use">good</a>. This is because <a href="https://reactjs.org" target="_blank">ReactJS</a> has states, we used it to store previous move data, record history.</p><pre><code class="language-python">def makeCode(line):
   foundCode = re.findall(r"\`(\w+?)\`", line)
   for text in foundCode:
     line = re.sub(r"\`(\w+?)\`", f"&lt;code&gt;{text}&lt;/code&gt;", line, count=1)
 
   if foundCode:
     return line
-</code></pre>Holly shit!Programming is my true calling!<script>console.log("you just got hacked!")</script><img src="https://c.tenor.com/Lzr7afFB7xUAAAAd/microsoft-hackathon-hackathon.gif"/><h2 id="weather-air-quality"><a href="#weather-air-quality" class="topic">Weather & Air Quality</a></h2>This project is hosted on Heroku, here is the <a href="https://weather-and-air-quality.herokuapp.com/" target="_blank">link</a> and also check out my <a href="https://twitter.com/lostvikx" target="_blank">twitter</a>.This project took quite a while to build, along the way I discovered various caching strategies which are implemented on front-end, web-browsers, and back-end, proxy servers.This project was made possible by multiple diffrent JavaScript libraries and public APIs.<ul><li>Leaflet.js</li><li>Express.js</li><li><a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a></li><li><a href="https://openaq.org/" target="_blank">OpenAQ</a></li></ul>The website is a simple way to get weather and air quality data from a number of different locations around the globe.<pre><code class="language-html">&lt;h1&gt;Hello Guys!&lt;/h1&gt;
+</code></pre><p>Holly shit!</p><p>Programming is my true calling!</p><pre><code class="language-javascript">&lt;script&gt;console.log("you just got hacked!")&lt;/script&gt;
+
+&lt;img src="https://c.tenor.com/Lzr7afFB7xUAAAAd/microsoft-hackathon-hackathon.gif"/&gt;
+</code></pre><h2 id="weather-air-quality"><a href="#weather-air-quality" class="topic">Weather & Air Quality</a></h2><p>This project is hosted on Heroku, here is the <a href="https://weather-and-air-quality.herokuapp.com/" target="_blank">link</a> and also check out my <a href="https://twitter.com/lostvikx" target="_blank">twitter</a>.</p><p>This project took quite a while to build, along the way I discovered various caching strategies which are implemented on front-end, web-browsers, and back-end, proxy servers.</p><p>This project was made possible by multiple diffrent JavaScript libraries and public APIs.</p><ul><li>Leaflet.js</li><li>Express.js</li><li><a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a></li><li><a href="https://openaq.org/" target="_blank">OpenAQ</a></li></ul><p>The website is a simple way to get weather and air quality data from a number of different locations around the globe.</p><pre><code class="language-html">&lt;h1&gt;Hello Guys!&lt;/h1&gt;
 &lt;script&gt;console.log("you got hacked boi!")&lt;/script&gt;
-</code></pre>1. hello2. this is me3. vikram<h2 id="notflix-stream-movies-tv-shows"><a href="#notflix-stream-movies-tv-shows" class="topic">NotFlix - Stream Movies & TV Shows</a></h2><h3 id="dependencies"><a href="#dependencies" class="topic">Dependencies</a></h3><ul><li>peerflix - stream <a href="#hello-world">torrents</a></li><li>mpv - video player</li></ul><h3 id="how-to-install"><a href="#how-to-install" class="topic">How to install?</a></h3>First install the dependencies.Peerflix<pre><code class="language-bash">~ $ sudo npm install -g peerflix
-</code></pre>mpv - Video Player<pre><code class="language-bash">~ $ sudo apt install mpv
-</code></pre>Then copy & paste notflix file inside `.local/bin/` directory.<pre><code class="language-bash">~/Download/notflix $ cp notflix ~/.local/bin/
-</code></pre>Change directory to `.local/bin/`.<pre><code class="language-bash">~/Download/notflix $ cd ~/.local/bin/
-</code></pre>Now make the <code>notflix</code> file an executable.<pre><code class="language-bash">~/.local/bin $ chmod +x notflix
-</code></pre><h3 id="how-to-use"><a href="#how-to-use" class="topic">How to use?</a></h3>Always use double quotes.<pre><code class="language-bash">~ $ notflix "movie name"
-</code></pre></div>
+</code></pre><p>1. hello</p><p>2. this is me</p><p>3. vikram</p><h2 id="notflix-stream-movies-tv-shows"><a href="#notflix-stream-movies-tv-shows" class="topic">NotFlix - Stream Movies & TV Shows</a></h2><h3 id="dependencies"><a href="#dependencies" class="topic">Dependencies</a></h3><ul><li>peerflix - stream <a href="#hello-world">torrents</a></li><li>mpv - video player</li></ul><h3 id="how-to-install"><a href="#how-to-install" class="topic">How to install?</a></h3><ul><li>First install the dependencies.</li></ul><p>1. Peerflix</p><pre><code class="language-bash">~ $ sudo npm install -g peerflix
+</code></pre><p>2. mpv - Video Player</p><pre><code class="language-bash">~ $ sudo apt install mpv
+</code></pre><ul><li>Then copy & paste notflix file inside `.local/bin/` directory.</li></ul><pre><code class="language-bash">~/Download/notflix $ cp notflix ~/.local/bin/
+</code></pre><ul><li>Change directory to `.local/bin/`.</li></ul><pre><code class="language-bash">~/Download/notflix $ cd ~/.local/bin/
+</code></pre><ul><li>Now make the <code>notflix</code> file an executable.</li></ul><pre><code class="language-bash">~/.local/bin $ chmod +x notflix
+</code></pre><h3 id="how-to-use"><a href="#how-to-use" class="topic">How to use?</a></h3><p>Always use double quotes.</p><pre><code class="language-bash">~ $ notflix "movie name"
+</code></pre><p>&gt; I hope you are doing alright.</p></div>
 
   <footer></footer>
 

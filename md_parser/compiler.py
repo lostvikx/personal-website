@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from inspect import iscode
 import os
 import re
 
@@ -81,9 +80,11 @@ def createArticle(mdFileName):
   with open(os.getcwd() + f"/../articles/{mdFileName}", "r") as f:
 
     prevLine = ""
+    paraCheck = ""
     inCodeBlock = False
     
     for line in f:
+      line = line.replace("<", "&lt;").replace(">", "&gt;")
       if not inCodeBlock: line = line.strip()
 
       line = makeLink(line) or line
@@ -138,13 +139,16 @@ def createArticle(mdFileName):
 
       article += codeBlock
 
+      if line != "":
+        line = f"<p>{line}</p>"
+
       article += line
 
     f.close()
 
   return article
 
-createArticle("this-is-a-test.md")
+# createArticle("this-is-a-test.md")
 
 def createHTMLFile(isBlog:bool, articleHTML:str)->str:
   """
@@ -171,8 +175,8 @@ def createHTMLFile(isBlog:bool, articleHTML:str)->str:
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="../css/dark.min.css">
+  <script src="../js/highlight.min.js"></script>
 </head>
 <body>
 
@@ -193,8 +197,8 @@ def createHTMLFile(isBlog:bool, articleHTML:str)->str:
 
   return html
 
-# with open(os.getcwd() + "/../public/blog/test.html", "w") as file_handle:
-#   file_handle.write(createHTMLFile(True, createArticle("this-is-a-test.md")))
-#   file_handle.close()
+with open(os.getcwd() + "/../public/blog/test.html", "w") as file_handle:
+  file_handle.write(createHTMLFile(True, createArticle("this-is-a-test.md")))
+  file_handle.close()
 
-# print(os.getcwd() + "/../public/blog/test.html")
+print(os.getcwd() + "/../public/blog/test.html")
