@@ -102,6 +102,12 @@ def createArticle(mdFileName):
     text, imgLink = re.findall(r"\!\[(.+)\]\((.+)\)", line)[0]
     return f"<img src=\"{imgLink}\" alt=\"{text}\" />"
   
+  def isHr(line):
+    return line[0:3] == "---"
+  
+  # blockquote
+  # mark
+  
   with open(os.getcwd() + f"/../articles/{mdFileName}", "r") as f:
 
     prevLine = ""
@@ -167,6 +173,10 @@ def createArticle(mdFileName):
 
       if isImg(line):
         article += makeImg(line)
+        line = ""
+
+      if isHr(line):
+        article += "<hr noshade />"
         line = ""
 
       if line != "":

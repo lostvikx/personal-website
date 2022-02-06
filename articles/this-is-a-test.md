@@ -1,8 +1,12 @@
 # Hello, World
  
-My `name` is **Vikram Singh Negi**, a self-taught `developer` who likes to hack his [laptop](https://mi.com/mi-notebook-14). The way you **move** is so [good](#how-to-use). This is because [ReactJS](https://reactjs.org) has states, we used it to store previous move data, record history.
+My `name` is **Vikram Singh Negi**, a ==self-taught== `developer` who likes to hack his [laptop](https://mi.com/mi-notebook-14). The way you **move** is so [good](#how-to-use). This is because [ReactJS](https://reactjs.org) has states, we used it to store previous move data, record history.
+
+---
 
 ![An image for me!](https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-cat-wearing-sunglasses-while-sitting-royalty-free-image-1571755145.jpg)
+
+> I hope you are doing alright. I really do care about to a lot.
 
 ```python
 def makeCode(line):
@@ -64,5 +68,3 @@ Always use double quotes.
 ```bash
 ~ $ notflix "movie name"
 ```
-
-> I hope you are doing alright.
