@@ -3,6 +3,7 @@
 import os
 import re
 import datetime
+import json
 
 # Parses the md file, outputs html string
 def createArticle(mdFileName, isBlog=True):
@@ -117,8 +118,6 @@ def createArticle(mdFileName, isBlog=True):
 
     if foundImg:
       return line
-
-
   
   def isHr(line):
     return line[0:3] == "---"
@@ -235,7 +234,7 @@ def createArticle(mdFileName, isBlog=True):
 # print(createArticle("fintech-info.md"))
 
 # Create entire HTML string
-def createHTMLFile(isBlog:bool, articleHTML:str)->str:
+def createHTMLFile(isBlog:bool, articleHTML:list)->str:
   """
   Params: isBlog, articleHTML
 
@@ -279,42 +278,62 @@ def createHTMLFile(isBlog:bool, articleHTML:str)->str:
 
   return html
 
-# Input md file
-while True:
+# # Input md file
+# while True:
 
-  fileName = input("Enter md file to convert: ")
+#   fileName = input("Enter md file to convert: ")
 
-  if "." in fileName:
-    print("Please enter the file name without the extension.")
-    continue
-  else:
-    break
+#   if "." in fileName:
+#     print("Please enter the file name without the extension.")
+#     continue
+#   else:
+#     break
 
-# Is a blog post or not
-while True:
 
-  confirm = ["yes", "y", "yup", "yeah"]
+# def saveHTMLFile(path, isBlog):
 
-  isBlog = input("Is Blog? (y/N): ").lower() or "n"
+#   with open(path, "w") as file_handle:
+#     file_handle.write(createHTMLFile(isBlog, createArticle(f"{fileName}.md", isBlog)))
+#     file_handle.close()
 
-  if isBlog in confirm:
+#   print(f"Your file: {path}")
 
-    with open(os.getcwd() + f"/public/blog/posts/{fileName}.html", "w") as file_handle:
-      file_handle.write(createHTMLFile(True, createArticle(f"{fileName}.md", True)))
-      file_handle.close()
+# # Is a blog post or not
+# while True:
 
-    print(f"Your file: {os.getcwd()}/public/blog/posts/{fileName}.html")
+#   confirm = ["yes", "y", "yup", "yeah"]
 
-    break
-  else:
+#   isBlog = input("Is Blog? (y/N): ").lower() or "n"
+
+#   if isBlog in confirm:
+
+#     saveHTMLFile(f"{os.getcwd()}/public/blog/posts/{fileName}.html", True)
+#     break
+#   else:
     
-    with open(os.getcwd() + f"/public/{fileName}.html", "w") as file_handle:
-      file_handle.write(createHTMLFile(False, createArticle(f"{fileName}.md", False)))
-      file_handle.close()
-
-    print(f"Your file: {os.getcwd()}/public/{fileName}.html")
-
-    break
+#     saveHTMLFile(f"{os.getcwd()}/public/{fileName}.html", False)
+#     break
 
 # json db
-# with open(os.getcwd() + f"")
+def saveToDB(pathToDB, data):
+
+  blogInfo = None
+
+  with open(pathToDB, "r") as db:
+    blogInfo = json.load(db)
+
+  # TODO: append each blog post information
+  blogInfo["results"].append({"title": "hello world", "time": "today"})
+
+  with open(pathToDB, "w") as db:
+    json.dump(blogInfo, db)
+
+  return blogInfo
+
+# print(saveToDB(f"{os.getcwd()}/db/blog_info.json", None))
+
+def clearResults():
+  with open(f"{os.getcwd()}/db/blog_info.json", "w") as db:
+    json.dump({"results": []}, db)
+
+# clearResults()
