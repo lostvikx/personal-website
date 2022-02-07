@@ -2,7 +2,9 @@
 
 import os
 import re
+import datetime
 
+# Parses the md file, outputs html string
 def createArticle(mdFileName, isBlog=True):
   """
   mdFileName: md file name
@@ -11,6 +13,10 @@ def createArticle(mdFileName, isBlog=True):
   """
 
   article = ""
+  blogTitle = ""
+  blogSubject = None
+  global timeCreated
+  timeCreated = datetime.datetime.now().strftime("%a %b %d %X %Y")
 
   def isHeader(line):
     return line[0:1] == "#" and line != ""
@@ -20,7 +26,14 @@ def createArticle(mdFileName, isBlog=True):
     headerText = " ".join(text)
     headerId = "-".join(re.sub(r"[\W_]+", " ", headerText).strip().lower().split(" "))
     header = f"<h{len(headerType)} id=\"{headerId}\"><a href=\"#{headerId}\" class=\"topic\">{headerText}</a></h{len(headerType)}>"
-    return header
+    
+    if len(headerType) == 1:
+      global timeCreated
+      title = headerText
+      header += f"<p class=\"post-info\">{timeCreated}, Author: Vikram S. Negi</p>"
+      return [header, title]
+    else:
+      return header
 
   def makeLink(line):
     foundLink = re.findall(r"\[(\w+?)\]\((.+?)\)", line)
@@ -61,8 +74,6 @@ def createArticle(mdFileName, isBlog=True):
     list = ""
     bullet, *text = line.split(" ")
     listItem = " ".join(text)
-
-    # makeLink(line)
 
     if init:
       list += "<ul>"
@@ -105,8 +116,8 @@ def createArticle(mdFileName, isBlog=True):
   def isHr(line):
     return line[0:3] == "---"
   
-  # blockquote
-  # mark
+  # TODO: blockquote
+  # TODO: mark
 
   if isBlog:
     path = os.getcwd() + f"/../articles/{mdFileName}"
@@ -117,6 +128,7 @@ def createArticle(mdFileName, isBlog=True):
 
     prevLine = ""
     inCodeBlock = False
+    isFirstPara = True
     
     for line in f:
       line = line.replace("<", "&lt;").replace(">", "&gt;")
@@ -130,7 +142,15 @@ def createArticle(mdFileName, isBlog=True):
       # print(index, line)
 
       if isHeader(line):
-        article += makeHeader(line)
+        headerOut = makeHeader(line)
+
+        if type(headerOut) == list:
+          headerTag = headerOut[0]
+          blogTitle += headerOut[1]
+        else:
+          headerTag = headerOut
+
+        article += headerTag
         line = ""
 
       unorderedList = ""
@@ -184,17 +204,28 @@ def createArticle(mdFileName, isBlog=True):
         article += "<hr noshade />"
         line = ""
 
-      if line != "":
+      if line != "" and isFirstPara:
+        blogSubject = line
+        line = f"<p>{line}</p>"
+        isFirstPara = False
+      elif line != "" and not isFirstPara:
         line = f"<p>{line}</p>"
 
       article += line
 
     f.close()
 
-  return article
+  return {
+    "article": article,
+    "blogTitle": blogTitle,
+    "blogSubject": blogSubject,
+    "timeCreated": timeCreated
+  }
 
-# createArticle("this-is-a-test.md")
+# Test func
+# print(createArticle("fintech-info.md"))
 
+# Create entire HTML string
 def createHTMLFile(isBlog:bool, articleHTML:str)->str:
   """
   Params: isBlog, articleHTML
@@ -215,7 +246,7 @@ def createHTMLFile(isBlog:bool, articleHTML:str)->str:
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>lostvikx | Home</title>
+  <title>{articleHTML["blogTitle"] or "Home"} | lostvikx</title>
   <link rel="stylesheet" href="{stylePath}">
   <link rel="stylesheet" href="../../css/dark.min.css">
   <script src="../../js/highlight.min.js"></script>
@@ -229,7 +260,7 @@ def createHTMLFile(isBlog:bool, articleHTML:str)->str:
     <div class="nav-link">[ <a href="/radio">Radio</a> ]</div>
   </nav>
 
-  <div id="article">{articleHTML}</div>
+  <div id="article">{articleHTML["article"]}</div>
 
   <footer></footer>
 
@@ -239,6 +270,7 @@ def createHTMLFile(isBlog:bool, articleHTML:str)->str:
 
   return html
 
+# Input md file
 while True:
 
   fileName = input("Enter md file to convert: ")
@@ -249,11 +281,12 @@ while True:
   else:
     break
 
+# Is a blog post or not
 while True:
 
   confirm = ["yes", "y", "yup", "yeah"]
 
-  isBlog = input("Is Blog? (y/N): ").lower()
+  isBlog = input("Is Blog? (y/N): ").lower() or "n"
 
   if isBlog in confirm:
 
@@ -274,4 +307,5 @@ while True:
 
     break
 
+# json db
 # with open(os.getcwd() + f"")

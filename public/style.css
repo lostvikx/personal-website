@@ -6,6 +6,7 @@
   --neon: #00FF00;
   --yellow: #FFFF00;
   --alt-bg: #303030;
+  --grey: rgb(131, 131, 131);
 }
 
 * {
@@ -71,7 +72,7 @@ nav {
 
 #article a:hover {
   /* text-decoration: underline; */
-  color: var(--yellow);
+  color: var(--grey);
 }
 
 #article h1 {
@@ -134,4 +135,11 @@ hr {
   width: 90%;
   opacity: 70%;
   margin: 1rem auto 3rem;
+}
+
+.post-info {
+  margin-bottom: 1rem;
+  font-style: italic;
+  font-size: 0.75rem;
+  color: var(--grey);
 }
