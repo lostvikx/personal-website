@@ -1,8 +1,13 @@
 # NGO Internship Experience
 
+My experience working with an NGO organization as a teacher.
+
+![NGO Image](https://images.unsplash.com/photo-1501290741922-b56c0d0884af?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80)
+
+---
+
 ## Introduction
-Hi, my name is Vikram Singh Negi. I am a student at ITM Business School pursuing PGDM in FinTech Batch 21-23, roll number - 20930021010.
-I was lucky to get an opportunity to work for an NGO called DBM India, provided by ITM Business School. I got to conduct English classes for Para Nursing students.
+Hi, my name is Vikram Singh Negi. I am a student at ITM Business School pursuing PGDM in FinTech Batch 21-23. I was lucky to get an opportunity to work for an NGO called DBM India, provided by ITM Business School. I got to conduct English classes for Para Nursing students.
 
 ## About DBM India
 Dharma Bharathi Mission (DBM) India is a humanitarian organization working to create lasting change in the lives of children, families and communities living in poverty and injustice. Its mission is to empower the beneficiaries by creating awareness and opportunities in education and employment. 

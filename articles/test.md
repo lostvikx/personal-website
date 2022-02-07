@@ -2,7 +2,7 @@
 
 This is a subject line. Please make sure not to include any html tags.
  
-My `name` is **Vikram Singh Negi**, a ==self-taught== `developer` who likes to hack his [laptop](https://mi.com/mi-notebook-14). The way you **move** is so [good](#how-to-use). This is because [ReactJS](https://reactjs.org) has states, we used it to store previous move data, record history.
+My `name big man` is **Vikram Singh Negi**, a ==self-taught== `developer` who likes to hack his [laptop](https://mi.com/mi-notebook-14). The way you **move** is so [good](#how-to-use). This is because [ReactJS](https://reactjs.org) has states, we used it to store previous move data, record history.
 
 ---
 

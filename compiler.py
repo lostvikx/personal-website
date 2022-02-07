@@ -36,14 +36,14 @@ def createArticle(mdFileName, isBlog=True):
       return header
 
   def makeLink(line):
-    foundLink = re.findall(r"\[(\w+?)\]\((.+?)\)", line)
+    foundLink = re.findall(r"\[(.+?)\]\((.+?)\)", line)
     # print(foundLink)
 
     for text, href in foundLink:
       if href[0:1] == "#":
-        line = re.sub(r"\[(\w+?)\]\((.+?)\)", f"<a href=\"{href}\">{text}</a>", line, count=1)
+        line = re.sub(r"\[(.+?)\]\((.+?)\)", f"<a href=\"{href}\">{text}</a>", line, count=1)
       else:
-        line = re.sub(r"\[(\w+?)\]\((.+?)\)", f"<a href=\"{href}\" target=\"_blank\">{text}</a>", line, count=1)
+        line = re.sub(r"\[(.+?)\]\((.+?)\)", f"<a href=\"{href}\" target=\"_blank\">{text}</a>", line, count=1)
 
     if foundLink: 
       # print("found:", line, end="\n\n")
@@ -84,9 +84,9 @@ def createArticle(mdFileName, isBlog=True):
     return list
 
   def makeCode(line):
-    foundCode = re.findall(r"\`(\w+?)\`", line)
+    foundCode = re.findall(r"\`([\w ]*?)\`", line)
     for text in foundCode:
-      line = re.sub(r"\`(\w+?)\`", f"<code>{text}</code>", line, count=1)
+      line = re.sub(r"\`[\w ]*?\`", f"<code>{text}</code>", line, count=1)
 
     if foundCode:
       return line
@@ -110,8 +110,15 @@ def createArticle(mdFileName, isBlog=True):
     return line[0:1] == "!"
   
   def makeImg(line):
-    text, imgLink = re.findall(r"\!\[(.+)\]\((.+)\)", line)[0]
-    return f"<img src=\"{imgLink}\" alt=\"{text}\" />"
+    foundImg = re.findall(r"^\!\[(.+?)\]\((.+?)\)", line)
+    
+    for alt, link in foundImg:
+      line = re.sub(r"\!\[(.+?)\]\((.+?)\)", f"<img src=\"{link}\" alt=\"{alt}\" loading=\"lazy\" />", line, count=1)
+
+    if foundImg:
+      return line
+
+
   
   def isHr(line):
     return line[0:3] == "---"
@@ -120,9 +127,9 @@ def createArticle(mdFileName, isBlog=True):
   # TODO: mark
 
   if isBlog:
-    path = os.getcwd() + f"/../articles/{mdFileName}"
+    path = os.getcwd() + f"/articles/{mdFileName}"
   else:
-    path = os.getcwd() + f"/../root_files/{mdFileName}"
+    path = os.getcwd() + f"/root_files/{mdFileName}"
   
   with open(path, "r") as f:
 
@@ -134,10 +141,14 @@ def createArticle(mdFileName, isBlog=True):
       line = line.replace("<", "&lt;").replace(">", "&gt;")
       if not inCodeBlock: line = line.strip()
 
+      if isImg(line):
+        article += makeImg(line)
+        line = ""
+
       line = makeLink(line) or line
       line = makeBold(line) or line
       line = makeItalic(line) or line
-      line = makeCode(line) or line
+      
 
       # print(index, line)
 
@@ -196,9 +207,7 @@ def createArticle(mdFileName, isBlog=True):
 
       article += codeBlock
 
-      if isImg(line):
-        article += makeImg(line)
-        line = ""
+      line = makeCode(line) or line
 
       if isHr(line):
         article += "<hr noshade />"
@@ -290,20 +299,20 @@ while True:
 
   if isBlog in confirm:
 
-    with open(os.getcwd() + f"/../public/blog/posts/{fileName}.html", "w") as file_handle:
+    with open(os.getcwd() + f"/public/blog/posts/{fileName}.html", "w") as file_handle:
       file_handle.write(createHTMLFile(True, createArticle(f"{fileName}.md", True)))
       file_handle.close()
 
-    print(f"Your file: {os.getcwd()}/../public/blog/posts/{fileName}.html")
+    print(f"Your file: {os.getcwd()}/public/blog/posts/{fileName}.html")
 
     break
   else:
     
-    with open(os.getcwd() + f"/../public/{fileName}.html", "w") as file_handle:
+    with open(os.getcwd() + f"/public/{fileName}.html", "w") as file_handle:
       file_handle.write(createHTMLFile(False, createArticle(f"{fileName}.md", False)))
       file_handle.close()
 
-    print(f"Your file: {os.getcwd()}/../public/{fileName}.html")
+    print(f"Your file: {os.getcwd()}/public/{fileName}.html")
 
     break
 
