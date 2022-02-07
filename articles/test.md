@@ -47,10 +47,6 @@ This project was made possible by multiple diffrent JavaScript libraries and pub
 
 The ***website is a simple way to get*** weather and air quality data from a number of different locations around the globe.
 
-1. hello
-2. this is me
-3. vikram
-
 ## NotFlix - Stream Movies & TV Shows
 
 ### Dependencies
