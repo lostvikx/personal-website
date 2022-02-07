@@ -40,7 +40,7 @@ nav a {
 }
 
 nav a:hover {
-  color: var(--yellow);
+  color: var(--text);
 }
 
 /* navbar */
@@ -51,7 +51,8 @@ nav {
   align-items: center;
   gap: 1rem;
   margin: 0.5rem 1rem 0;
-  color: var(--blue);
+  color: var(--text);
+  font-weight: 500;
 }
 
 .nav-link {

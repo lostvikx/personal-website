@@ -3,7 +3,7 @@
 import os
 import re
 
-def createArticle(mdFileName):
+def createArticle(mdFileName, isBlog=True):
   """
   mdFileName: md file name
 
@@ -107,8 +107,13 @@ def createArticle(mdFileName):
   
   # blockquote
   # mark
+
+  if isBlog:
+    path = os.getcwd() + f"/../articles/{mdFileName}"
+  else:
+    path = os.getcwd() + f"/../root_files/{mdFileName}"
   
-  with open(os.getcwd() + f"/../articles/{mdFileName}", "r") as f:
+  with open(path, "r") as f:
 
     prevLine = ""
     inCodeBlock = False
@@ -201,8 +206,8 @@ def createHTMLFile(isBlog:bool, articleHTML:str)->str:
   javascriptPath = "../../js/main.js"
 
   if not isBlog:
-    stylePath = stylePath[1:]
-    javascriptPath = javascriptPath[1:]
+    stylePath = "./style.css"
+    javascriptPath = "./js/main.js"
 
   html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -234,8 +239,38 @@ def createHTMLFile(isBlog:bool, articleHTML:str)->str:
 
   return html
 
-with open(os.getcwd() + "/../public/blog/posts/fintech-info.html", "w") as file_handle:
-  file_handle.write(createHTMLFile(True, createArticle("fintech-info.md")))
-  file_handle.close()
+while True:
 
-print(os.getcwd() + "/../public/blog/test.html")
+  fileName = input("Enter md file to convert: ")
+
+  if "." in fileName:
+    print("Please enter the file name without the extension.")
+    continue
+  else:
+    break
+
+while True:
+
+  confirm = ["yes", "y", "yup", "yeah"]
+
+  isBlog = input("Is Blog? (y/N): ").lower()
+
+  if isBlog in confirm:
+
+    with open(os.getcwd() + f"/../public/blog/posts/{fileName}.html", "w") as file_handle:
+      file_handle.write(createHTMLFile(True, createArticle(f"{fileName}.md", True)))
+      file_handle.close()
+
+    print(f"Your file: {os.getcwd()}/../public/blog/posts/{fileName}.html")
+
+    break
+  else:
+    
+    with open(os.getcwd() + f"/../public/{fileName}.html", "w") as file_handle:
+      file_handle.write(createHTMLFile(False, createArticle(f"{fileName}.md", False)))
+      file_handle.close()
+
+    print(f"Your file: {os.getcwd()}/../public/{fileName}.html")
+
+    break
+
