@@ -274,3 +274,4 @@ while True:
 
     break
 
+# with open(os.getcwd() + f"")
