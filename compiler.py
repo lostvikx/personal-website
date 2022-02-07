@@ -122,8 +122,10 @@ def createArticle(mdFileName, isBlog=True):
   def isHr(line):
     return line[0:3] == "---"
   
+  # TODO: error handling if syntax does has None as the input: ![]() maybe add "" (blank sting) instead of None
   # TODO: blockquote
   # TODO: mark
+  # TODO: <!-- comments -->
 
   if isBlog:
     path = os.getcwd() + f"/articles/{mdFileName}"
@@ -278,41 +280,41 @@ def createHTMLFile(isBlog:bool, articleHTML:list)->str:
 
   return html
 
-# # Input md file
-# while True:
+# Input md file
+while True:
 
-#   fileName = input("Enter md file to convert: ")
+  fileName = input("Enter md file to convert: ")
 
-#   if "." in fileName:
-#     print("Please enter the file name without the extension.")
-#     continue
-#   else:
-#     break
+  if "." in fileName:
+    print("Please enter the file name without the extension.")
+    continue
+  else:
+    break
 
 
-# def saveHTMLFile(path, isBlog):
+def saveHTMLFile(path, isBlog):
 
-#   with open(path, "w") as file_handle:
-#     file_handle.write(createHTMLFile(isBlog, createArticle(f"{fileName}.md", isBlog)))
-#     file_handle.close()
+  with open(path, "w") as file_handle:
+    file_handle.write(createHTMLFile(isBlog, createArticle(f"{fileName}.md", isBlog)))
+    file_handle.close()
 
-#   print(f"Your file: {path}")
+  print(f"Your file: {path}")
 
-# # Is a blog post or not
-# while True:
+# Is a blog post or not
+while True:
 
-#   confirm = ["yes", "y", "yup", "yeah"]
+  confirm = ["yes", "y", "yup", "yeah"]
 
-#   isBlog = input("Is Blog? (y/N): ").lower() or "n"
+  isBlog = input("Is Blog? (y/N): ").lower() or "n"
 
-#   if isBlog in confirm:
+  if isBlog in confirm:
 
-#     saveHTMLFile(f"{os.getcwd()}/public/blog/posts/{fileName}.html", True)
-#     break
-#   else:
+    saveHTMLFile(f"{os.getcwd()}/public/blog/posts/{fileName}.html", True)
+    break
+  else:
     
-#     saveHTMLFile(f"{os.getcwd()}/public/{fileName}.html", False)
-#     break
+    saveHTMLFile(f"{os.getcwd()}/public/{fileName}.html", False)
+    break
 
 # json db
 def saveToDB(pathToDB, data):
