@@ -12,7 +12,7 @@ Hi, my name is Vikram Singh Negi. I am a student at ITM Business School pursuing
 ## About DBM India
 Dharma Bharathi Mission (DBM) India is a humanitarian organization working to create lasting change in the lives of children, families and communities living in poverty and injustice. Its mission is to empower the beneficiaries by creating awareness and opportunities in education and employment.
 
-> NGO Model: This is their ‘3E’ model - Empower, Educate, and Employment.
+> NGO Model: This is their ‘3E’ model - Empower, Educate, and Employment. For more information [click here](https://www.dbmindia.org/).
 
 Project Title: Bridging the Digital Divide - An E-learning Project for the Underprivileged.
 

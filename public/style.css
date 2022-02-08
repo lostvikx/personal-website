@@ -5,7 +5,7 @@
   --pink: #ff4081;
   --neon: #00FF00;
   --yellow: #FFFF00;
-  --alt-bg: #303030;
+  --alt-bg: #252525;
   --grey: rgb(131, 131, 131);
 }
 
@@ -143,3 +143,17 @@ hr {
   font-size: 0.75rem;
   color: var(--grey);
 }
+
+blockquote {
+  margin: 0;
+  padding-left: 1.25em;
+  padding-right: 0.75em;
+  border-left: 0.35rem solid var(--blue);
+  margin: 0.5rem 0;
+  background-color: var(--alt-bg);
+  border-radius: 5px;
+}
+
+/* .quote {
+  padding: 0.5em !important;
+} */

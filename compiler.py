@@ -121,11 +121,20 @@ def createArticle(mdFileName, isBlog=True):
   
   def isHr(line):
     return line[0:3] == "---"
+
+  def isBlockquote(line):
+    return line[0:1] == ">"
+
+  def makeBlockquote(line):
+    sign, *text = line.split(" ")
+    text = " ".join(text)
+    return f"<blockquote><p class=\"quote\">{text}</p></blockquote>"
   
   # TODO: error handling if syntax does has None as the input: ![]() maybe add "" (blank sting) instead of None
   # TODO: blockquote
   # TODO: mark
   # TODO: <!-- comments -->
+  # TODO: some functions seem repetitive, refactor those!
 
   if isBlog:
     path = os.getcwd() + f"/articles/{mdFileName}"
@@ -139,7 +148,7 @@ def createArticle(mdFileName, isBlog=True):
     isFirstPara = True
     
     for line in f:
-      line = line.replace("<", "&lt;").replace(">", "&gt;")
+      # line = line.replace("<", "&lt;").replace(">", "&gt;")
       if not inCodeBlock: line = line.strip()
 
       if isImg(line):
@@ -150,6 +159,9 @@ def createArticle(mdFileName, isBlog=True):
       line = makeBold(line) or line
       line = makeItalic(line) or line
       
+      if isBlockquote(line):
+        article += makeBlockquote(line)
+        line = ""
 
       # print(index, line)
 
@@ -225,6 +237,8 @@ def createArticle(mdFileName, isBlog=True):
 
     f.close()
 
+  # print(article)
+
   return {
     "article": article,
     "blogTitle": blogTitle,
@@ -243,12 +257,18 @@ def createHTMLFile(isBlog:bool, articleHTML:list)->str:
   Returns: returns html string
   """
 
-  stylePath = "../../style.css"
-  javascriptPath = "../../js/main.js"
+  stylePath = "./style.css"
+  javascriptPath = "./js/main.js"
+  codeBlockTags = {
+    "css": "<link rel=\"stylesheet\" href=\"./css/dark.min.css\">",
+    "js": "<script src=\"./js/highlight.min.js\"></script>"
+  }
 
-  if not isBlog:
-    stylePath = "./style.css"
-    javascriptPath = "./js/main.js"
+  if isBlog:
+    stylePath = "../../style.css"
+    javascriptPath = "../../js/main.js"
+    codeBlockTags["css"] = "<link rel=\"stylesheet\" href=\"../../css/dark.min.css\">"
+    codeBlockTags["js"] = "<script src=\"../../js/highlight.min.js\"></script>"
 
   html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -258,8 +278,8 @@ def createHTMLFile(isBlog:bool, articleHTML:list)->str:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{articleHTML["blogTitle"] or "Home"} | lostvikx</title>
   <link rel="stylesheet" href="{stylePath}">
-  <link rel="stylesheet" href="../../css/dark.min.css">
-  <script src="../../js/highlight.min.js"></script>
+  {codeBlockTags["css"] or ""}
+  {codeBlockTags["js"] or ""}
 </head>
 <body>
 
@@ -321,18 +341,25 @@ def saveToDB(pathToDB, data):
 
   blogInfo = None
 
+  # read and load json as dict
   with open(pathToDB, "r") as db:
     blogInfo = json.load(db)
 
-  # TODO: append each blog post information
-  blogInfo["results"].append({"title": "hello world", "time": "today"})
+  # TODO: append each blog post information, except the html string
+  blogInfo["results"].append(data)
 
+  # clear the data and re-write everything 
   with open(pathToDB, "w") as db:
     json.dump(blogInfo, db)
 
   return blogInfo
 
-# print(saveToDB(f"{os.getcwd()}/db/blog_info.json", None))
+
+# print(saveToDB(f"{os.getcwd()}/db/blog_info.json", {
+#   "articleName": "test",
+#   "tags": ["fintech", "india", "finance"],
+#   "articlePath": "./blog/posts/test.html"
+# }))
 
 def clearResults():
   with open(f"{os.getcwd()}/db/blog_info.json", "w") as db:
