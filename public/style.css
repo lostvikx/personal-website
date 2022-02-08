@@ -145,15 +145,13 @@ hr {
 }
 
 blockquote {
-  margin: 0;
-  padding-left: 1.25em;
-  padding-right: 0.75em;
+  padding: 1em 0.75em 1em 1.25em;
   border-left: 0.35rem solid var(--blue);
   margin: 0.5rem 0;
   background-color: var(--alt-bg);
   border-radius: 5px;
 }
 
-/* .quote {
-  padding: 0.5em !important;
-} */
+.quote {
+  font-style: italic;
+}

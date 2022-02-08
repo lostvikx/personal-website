@@ -30,8 +30,11 @@ Programming is my true calling, Vikram S. Negi!
     hackerman++;
     console.log("you just got hacked!");
   }
+
+  console.log("you just got hacked!");
 </script>
 ```
+
 ## Weather & Air Quality
 
 This project is hosted on Heroku, here is the [link](https://weather-and-air-quality.herokuapp.com/) and also check out my [twitter](https://twitter.com/lostvikx).

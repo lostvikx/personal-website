@@ -13,6 +13,8 @@ def createArticle(mdFileName, isBlog=True):
   return: article html
   """
 
+  # TODO: Add tags to articles, maybe a custom syntax in the markdown file
+
   article = ""
   blogTitle = ""
   blogSubject = None
@@ -131,7 +133,6 @@ def createArticle(mdFileName, isBlog=True):
     return f"<blockquote><p class=\"quote\">{text}</p></blockquote>"
   
   # TODO: error handling if syntax does has None as the input: ![]() maybe add "" (blank sting) instead of None
-  # TODO: blockquote
   # TODO: mark
   # TODO: <!-- comments -->
   # TODO: some functions seem repetitive, refactor those!
@@ -148,7 +149,10 @@ def createArticle(mdFileName, isBlog=True):
     isFirstPara = True
     
     for line in f:
+      # cross site scripting (xss) security reason
       # line = line.replace("<", "&lt;").replace(">", "&gt;")
+      line = line.replace("<", "&lt;")
+
       if not inCodeBlock: line = line.strip()
 
       if isImg(line):
