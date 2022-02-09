@@ -10,7 +10,7 @@ def createArticle(mdFileName, isBlog=True):
   """
   mdFileName: md file name
 
-  return: article html
+  return: article html string
   """
 
   # TODO: Add tags to articles, maybe a custom syntax in the markdown file
@@ -254,7 +254,7 @@ def createArticle(mdFileName, isBlog=True):
 # print(createArticle("fintech-info.md"))
 
 # Create entire HTML string
-def createHTMLFile(isBlog:bool, articleHTML:list)->str:
+def createHTMLFile(isBlog:bool, articleHTML:dict)->str:
   """
   Params: isBlog, articleHTML
 
@@ -269,10 +269,10 @@ def createHTMLFile(isBlog:bool, articleHTML:list)->str:
   }
 
   if isBlog:
-    stylePath = "../../style.css"
-    javascriptPath = "../../js/main.js"
-    codeBlockTags["css"] = "<link rel=\"stylesheet\" href=\"../../css/dark.min.css\">"
-    codeBlockTags["js"] = "<script src=\"../../js/highlight.min.js\"></script>"
+    stylePath = "../style.css"
+    javascriptPath = "../js/main.js"
+    codeBlockTags["css"] = "<link rel=\"stylesheet\" href=\"../css/dark.min.css\">"
+    codeBlockTags["js"] = "<script src=\"../js/highlight.min.js\"></script>"
 
   html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -304,41 +304,80 @@ def createHTMLFile(isBlog:bool, articleHTML:list)->str:
 
   return html
 
+def saveHTMLFile(path, isBlog, fileName):
+
+  try:
+    HTMLString = createHTMLFile(isBlog, createArticle(f"{fileName}.md", isBlog))
+  except:
+    HTMLString = ""
+
+  if HTMLString != "":
+    with open(path, "w") as file_handle:
+      file_handle.write(HTMLString)
+      file_handle.close()
+
+    print(f"Your HTML file: {path}")
+  else:
+    print(f"{fileName} doesn't exists!")
+
 # Input md file
+fileName = None
 while True:
 
-  fileName = input("Enter md file to convert: ")
+  fName = input("Enter md file to convert: ") or "test"
 
-  if "." in fileName:
-    print("Please enter the file name without the extension.")
+  fileCom = fName.split(".")
+
+  if fileCom[-1] == "md":
+    fileName = ".".join(fileCom[:-1])
+  else:
+    fileName = fName
+
+  articlePath = f"{os.getcwd()}/articles/{fileName}.md"
+  rootFilePath = f"{os.getcwd()}/root_files/{fileName}.md"
+
+  articlePathExists = os.path.exists(articlePath)
+  rootFilePathExists = os.path.exists(rootFilePath)
+
+  if articlePathExists and rootFilePathExists:
+    print(f"\nfound [1]: {articlePath}")
+    print(f"found [2]: {rootFilePath}\n")
+
+    print("[1] -> blog\n[2] -> root_file")
+
+    # Is a blog post or not
+    while True:
+      try:
+        foundId = int(input("\nSelection: "))
+        # print(foundId, type(foundId))
+
+        if foundId == 1:
+          saveHTMLFile(f"{os.getcwd()}/public/blog/{fileName}.html", True, fileName)
+        elif foundId == 2:
+          saveHTMLFile(f"{os.getcwd()}/public/{fileName}.html", False, fileName)
+        else:
+          print("Enter a valid option!")
+          continue
+
+        break
+      except:
+        print("Enter a valid option!")
+        continue
+
+  elif articlePathExists:
+    print(f"\nfound: {articlePath}")
+    saveHTMLFile(f"{os.getcwd()}/public/blog/{fileName}.html", True, fileName)
+  elif rootFilePathExists:
+    print(f"\nfound: {rootFilePath}")
+    saveHTMLFile(f"{os.getcwd()}/public/{fileName}.html", False, fileName)
+  else:
+    print(f"Error: {fileName} not found!")
+
+  if articlePathExists or rootFilePathExists:
+    break
+  else:
     continue
-  else:
-    break
 
-
-def saveHTMLFile(path, isBlog):
-
-  with open(path, "w") as file_handle:
-    file_handle.write(createHTMLFile(isBlog, createArticle(f"{fileName}.md", isBlog)))
-    file_handle.close()
-
-  print(f"Your file: {path}")
-
-# Is a blog post or not
-while True:
-
-  confirm = ["yes", "y", "yup", "yeah"]
-
-  isBlog = input("Is Blog? (y/N): ").lower() or "n"
-
-  if isBlog in confirm:
-
-    saveHTMLFile(f"{os.getcwd()}/public/blog/posts/{fileName}.html", True)
-    break
-  else:
-    
-    saveHTMLFile(f"{os.getcwd()}/public/{fileName}.html", False)
-    break
 
 # json db
 def saveToDB(pathToDB, data):

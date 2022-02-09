@@ -32,6 +32,9 @@ app.get("/blog/posts", (req, res) => {
 // 404 Page
 app.get("*", (req, res) => {
 
-  res.status(404).send("nani?");
+  console.log(req.url)
+
+  // res.redirect("*.html");
+  res.status(404).send("nani? 404 not found");
 
 });
