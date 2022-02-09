@@ -3,7 +3,8 @@
 const express = require("express");
 const app = express();
 
-app.use("/", express.static(__dirname + "/public"));
+// This is perfect!
+app.use("/", express.static(__dirname + "/public", {extensions:['html']}));
 
 const HOST = "localhost";
 const PORT = process.env.PORT | 3000;
@@ -29,12 +30,9 @@ app.get("/blog/posts", (req, res) => {
   res.redirect("/blog");
 });
 
-// 404 Page
+// TODO: 404 Page
 app.get("*", (req, res) => {
 
-  console.log(req.url)
-
-  // res.redirect("*.html");
   res.status(404).send("nani? 404 not found");
 
 });
