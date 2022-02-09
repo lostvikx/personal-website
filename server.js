@@ -3,7 +3,7 @@
 const express = require("express");
 const app = express();
 
-// This is perfect!
+// This is might not be perfect!
 app.use("/", express.static(__dirname + "/public", {extensions:['html']}));
 
 const HOST = "localhost";
