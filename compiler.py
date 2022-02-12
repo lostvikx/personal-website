@@ -10,7 +10,7 @@ def createArticle(mdFileName, isBlog=True):
   """
   mdFileName: md file name
 
-  return: article html string
+  return: { article, blogTitle, blogSubject, timeCreated }
   """
 
   # TODO: Add tags to articles, maybe a custom syntax in the markdown file
@@ -18,8 +18,11 @@ def createArticle(mdFileName, isBlog=True):
   article = ""
   blogTitle = ""
   blogSubject = None
+  # global variables
   global timeCreated
   timeCreated = datetime.datetime.now().strftime("%a %b %d %X %Y")
+  global thumbnail
+  thumbnail = ""
 
   def isHeader(line):
     return line[0:1] == "#" and line != ""
@@ -116,6 +119,7 @@ def createArticle(mdFileName, isBlog=True):
     foundImg = re.findall(r"^\!\[(.+?)\]\((.+?)\)", line)
     
     for alt, link in foundImg:
+      if thumbnail == "": thumbnail = link
       line = re.sub(r"\!\[(.+?)\]\((.+?)\)", f"<img src=\"{link}\" alt=\"{alt}\" loading=\"lazy\" />", line, count=1)
 
     if foundImg:
@@ -302,9 +306,20 @@ def createHTMLFile(isBlog:bool, articleHTML:dict)->str:
 </body>
 </html>"""
 
+
+  
+
   return html
 
-def saveHTMLFile(path, isBlog, fileName):
+def saveHTMLFile(isBlog:bool, fileName:str)->None:
+  """
+  Creates an HTML file in either the /blog or / dir
+  """
+
+  if isBlog:
+    path = f"{os.getcwd()}/public/blog/{fileName}.html"
+  else:
+    path = f"{os.getcwd()}/public/{fileName}.html"
 
   try:
     HTMLString = createHTMLFile(isBlog, createArticle(f"{fileName}.md", isBlog))
@@ -324,15 +339,18 @@ def saveHTMLFile(path, isBlog, fileName):
 fileName = None
 while True:
 
+  # if blank
   fName = input("Enter md file to convert: ") or "test"
 
   fileCom = fName.split(".")
 
+  # .md file
   if fileCom[-1] == "md":
     fileName = ".".join(fileCom[:-1])
   else:
     fileName = fName
 
+  # check for the .md fileName in both article and root dir
   articlePath = f"{os.getcwd()}/articles/{fileName}.md"
   rootFilePath = f"{os.getcwd()}/root_files/{fileName}.md"
 
@@ -352,9 +370,9 @@ while True:
         # print(foundId, type(foundId))
 
         if foundId == 1:
-          saveHTMLFile(f"{os.getcwd()}/public/blog/{fileName}.html", True, fileName)
+          saveHTMLFile(True, fileName)
         elif foundId == 2:
-          saveHTMLFile(f"{os.getcwd()}/public/{fileName}.html", False, fileName)
+          saveHTMLFile(False, fileName)
         else:
           print("Enter a valid option!")
           continue
@@ -366,27 +384,45 @@ while True:
 
   elif articlePathExists:
     print(f"\nfound: {articlePath}")
-    saveHTMLFile(f"{os.getcwd()}/public/blog/{fileName}.html", True, fileName)
+    saveHTMLFile(True, fileName)
   elif rootFilePathExists:
     print(f"\nfound: {rootFilePath}")
-    saveHTMLFile(f"{os.getcwd()}/public/{fileName}.html", False, fileName)
+    saveHTMLFile(False, fileName)
   else:
-    print(f"Error: {fileName} not found!")
+    print(f"Error: {fileName}.md not found!")
 
   if articlePathExists or rootFilePathExists:
     break
   else:
     continue
 
+def enterTags(nTags=3):
+  
+  tags = []
+
+  # testing
+  if tags == "": return ["test"]
+
+  while nTags > 0:
+
+    tag = input("HashTag: ")
+    tags.append(tag)
+
+    nTags -= 1 
+
+  return tags
 
 # json db
-def saveToDB(pathToDB, data):
+def saveToBlogDB(data):
 
+  pathToDB = f"{os.getcwd()}/db/blog-info.json"
   blogInfo = None
 
   # read and load json as dict
   with open(pathToDB, "r") as db:
     blogInfo = json.load(db)
+
+  data["tags"] = enterTags()
 
   # TODO: append each blog post information, except the html string
   blogInfo["results"].append(data)
@@ -398,12 +434,12 @@ def saveToDB(pathToDB, data):
   return blogInfo
 
 
-# print(saveToDB(f"{os.getcwd()}/db/blog_info.json", {
+# print(saveToDB({
 #   "articleName": "test",
-#   "tags": ["fintech", "india", "finance"],
 #   "articlePath": "./blog/posts/test.html"
 # }))
 
+# !Important: Only for testing, clearing the blog_info.json
 def clearResults():
   with open(f"{os.getcwd()}/db/blog_info.json", "w") as db:
     json.dump({"results": []}, db)
