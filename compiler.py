@@ -49,7 +49,7 @@ def createArticle(mdFileName:str, isBlog=True):
       if href[0:1] == "#":
         line = re.sub(r"\[(.+?)\]\((.+?)\)", f"<a href=\"{href}\">{text}</a>", line, count=1)
       else:
-        line = re.sub(r"\[(.+?)\]\((.+?)\)", f"<a href=\"{href}\" target=\"_blank\">{text}</a>", line, count=1)
+        line = re.sub(r"\[(.+?)\]\((.+?)\)", f"<a href=\"{href}\" target=\"_blank\" rel=\"noopener noreferrer\">{text}</a>", line, count=1)
 
     if foundLink: 
       # print("found:", line, end="\n\n")
@@ -361,8 +361,12 @@ def makeHTMLString(isBlog:bool, articleHTML:dict)->str:
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{articleHTML["blogTitle"] or "Home"} | lostvikx</title>
+  <title>lostvikx | {articleHTML["blogTitle"] or "Home"}</title>
   <link rel="stylesheet" href="{stylePath}">
+  <link 
+    rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💀</text></svg>"
+  >
   {codeBlockTags["css"] or ""}
   {codeBlockTags["js"] or ""}
 </head>
@@ -371,13 +375,23 @@ def makeHTMLString(isBlog:bool, articleHTML:dict)->str:
   <nav>
     <div class="nav-link">[ <a href="/">Home</a> ]</div>
     <div class="nav-link">[ <a href="/blog">Blog</a> ]</div>
-    <div class="nav-link">[ <a href="/github" target="_blank">GitHub</a> ]</div>
+    <div class="nav-link">[ <a href="/github" target="_blank" rel="noopener noreferrer">GitHub</a> ]</div>
     <div class="nav-link">[ <a href="/radio">Radio</a> ]</div>
   </nav>
 
   <div id="article">{articleHTML["article"]}</div>
 
-  <footer></footer>
+  <hr />
+  
+  <footer>
+    <div>This website was crafted with the help of a lot of ☕ and 💪🏼</div>
+    <div class="contact-links">
+      <div><a href="mailto:viknegi0@gmail.com">Mail</a></div>
+      <div><a href="https://github.com/lostvikx" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+      <div><a href="https://twitter.com/lostvikx" target="_blank" rel="noopener noreferrer">Twitter</a></div>
+      <div><a href="https://linkedin.com/in/vikram-singh-negi/" target="_blank" rel="noopener noreferrer">Linkedin</a></div>
+    </div>
+  </footer>
 
   <script src="{javascriptPath}" type="module"></script>
 </body>

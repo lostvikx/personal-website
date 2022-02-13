@@ -27,7 +27,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text);
   font-weight: 400;
-  line-height: 1,6;
+  line-height: 1.3;
 }
 
 a {
@@ -35,6 +35,7 @@ a {
   color: var(--pink);
 }
 
+/* navbar */
 nav a {
   font-weight: 500;
   font-size: 1.2rem;
@@ -44,7 +45,6 @@ nav a:hover {
   color: var(--text);
 }
 
-/* navbar */
 nav {
   display: flex;
   flex-flow: row wrap;
@@ -59,6 +59,35 @@ nav {
 .nav-link {
   font-size: 1.25rem;
 }
+
+/* footer */
+footer {
+  margin: 0 1rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--grey);
+  gap: 0.5rem;
+}
+
+footer div {
+  text-align: center;
+}
+
+.contact-links {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contact-links a:hover {
+  color: var(--grey);
+}
+
 
 /* article */
 #article {
