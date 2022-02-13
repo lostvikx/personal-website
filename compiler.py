@@ -6,7 +6,7 @@ import datetime
 import json
 
 # Parses the md file, outputs html string
-def createArticle(mdFileName, isBlog=True):
+def createArticle(mdFileName:str, isBlog=True):
   """
   mdFileName: md file name
 
@@ -116,16 +116,13 @@ def createArticle(mdFileName, isBlog=True):
     return line[0:1] == "!"
   
   def makeImg(line):
-    foundImg = re.findall(r"^\!\[(.+?)\]\((.+?)\)", line)
-    
+    foundImg = re.findall(r"\!\[(.+?)\]\((.+?)\)", line)
+
     for alt, link in foundImg:
-      # if thumbnail == "": 
-      #   print("thumbnail is blank", link)
-      #   try:
-      #     thumbnail = str(link)
-      #   except:
-      #     print("thumb err")
-      #     thumbnail = ""
+      global thumbnail
+      if thumbnail == "": 
+        print("thumbnail is blank", link)
+        thumbnail = link
 
       line = re.sub(r"\!\[(.+?)\]\((.+?)\)", f"<img src=\"{link}\" alt=\"{alt}\" loading=\"lazy\" />", line, count=1)
 
@@ -168,9 +165,12 @@ def createArticle(mdFileName, isBlog=True):
 
       if not inCodeBlock: line = line.strip()
 
-      if isImg(line):
-        article += makeImg(line)
-        line = ""
+      # if isImg(line):
+      #   article += makeImg(line)
+      #   line = ""
+
+      # Check this, if any errors regarding imgs
+      line = makeImg(line) or line
 
       line = makeLink(line) or line
       line = makeBold(line) or line
@@ -244,7 +244,13 @@ def createArticle(mdFileName, isBlog=True):
         line = ""
 
       if line != "" and isFirstPara:
-        blogSubject = line
+        # blogSubject = line
+
+        if len(line) > 150:
+          blogSubject = line[:147] + "..."
+        else:
+          blogSubject = line
+
         line = f"<p>{line}</p>"
         isFirstPara = False
       elif line != "" and not isFirstPara:
@@ -256,11 +262,21 @@ def createArticle(mdFileName, isBlog=True):
 
   # print(article)
 
+  fileCom = mdFileName.split(".")
+  fileName = "".join(fileCom[:-1])
+
+  if isBlog:
+    pathToHTMLFile = f"./blog/{fileName}.html"
+  else:
+    pathToHTMLFile = f"./{fileName}.html"
+
   return {
     "article": article,
+    "pathToHTMLFile": pathToHTMLFile,
     "blogTitle": blogTitle,
     "blogSubject": blogSubject,
-    "timeCreated": timeCreated
+    "timeCreated": timeCreated,
+    "thumbnail": thumbnail
   }
 
 # Test func
@@ -367,8 +383,11 @@ def makeHTMLString(isBlog:bool, articleHTML:dict)->str:
 </body>
 </html>"""
 
+  # rm article, html string, from the object
   articleHTML.pop("article", None)
-  saveToBlogDB(articleHTML)
+
+  if isBlog:
+    saveToBlogDB(articleHTML)
 
   return html
 
@@ -408,7 +427,7 @@ while True:
 
   # .md file
   if fileCom[-1] == "md":
-    fileName = ".".join(fileCom[:-1])
+    fileName = "".join(fileCom[:-1])
   else:
     fileName = fName
 

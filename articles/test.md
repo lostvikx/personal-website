@@ -22,6 +22,8 @@ def makeCode(line):
 
 Holly shit!
 
+![test gif](https://c.tenor.com/4brx30KaqCQAAAAC/rage-%E6%86%A4%E6%80%92.gif)
+
 Programming is my true calling, Vikram S. Negi!
 
 ```html
