@@ -119,7 +119,14 @@ def createArticle(mdFileName, isBlog=True):
     foundImg = re.findall(r"^\!\[(.+?)\]\((.+?)\)", line)
     
     for alt, link in foundImg:
-      if thumbnail == "": thumbnail = link
+      # if thumbnail == "": 
+      #   print("thumbnail is blank", link)
+      #   try:
+      #     thumbnail = str(link)
+      #   except:
+      #     print("thumb err")
+      #     thumbnail = ""
+
       line = re.sub(r"\!\[(.+?)\]\((.+?)\)", f"<img src=\"{link}\" alt=\"{alt}\" loading=\"lazy\" />", line, count=1)
 
     if foundImg:
@@ -145,6 +152,8 @@ def createArticle(mdFileName, isBlog=True):
     path = os.getcwd() + f"/articles/{mdFileName}"
   else:
     path = os.getcwd() + f"/root_files/{mdFileName}"
+
+  print(f"reading {mdFileName}...")
   
   with open(path, "r") as f:
 
@@ -257,13 +266,65 @@ def createArticle(mdFileName, isBlog=True):
 # Test func
 # print(createArticle("fintech-info.md"))
 
+def enterTags(nTags=3):
+  
+  tags = []
+
+  # testing
+  if tags == "": return ["test"]
+
+  while nTags > 0:
+
+    tag = input("HashTag: ")
+    tags.append(tag)
+
+    nTags -= 1 
+
+  return tags
+
+# json db
+def saveToBlogDB(data):
+
+  pathToDB = f"{os.getcwd()}/db/blog-info.json"
+  blogInfo = None
+
+  # read and load json as dict
+  with open(pathToDB, "r") as db:
+    blogInfo = json.load(db)
+
+  data["tags"] = enterTags()
+
+  # TODO: append each blog post information, except the html string
+  blogInfo["results"].append(data)
+
+  # clear the data and re-write everything 
+  with open(pathToDB, "w") as db:
+    json.dump(blogInfo, db)
+
+  return blogInfo
+
+
+# print(saveToBlogDB({
+#   "articleName": "test",
+#   "articlePath": "./blog/posts/test.html"
+# }))
+
+# !Important: Only for testing, clearing the blog_info.json
+def clearResults():
+  with open(f"{os.getcwd()}/db/blog_info.json", "w") as db:
+    json.dump({"results": []}, db)
+
+# clearResults()
+
 # Create entire HTML string
-def createHTMLFile(isBlog:bool, articleHTML:dict)->str:
+def makeHTMLString(isBlog:bool, articleHTML:dict)->str:
   """
   Params: isBlog, articleHTML
 
   Returns: returns html string
   """
+
+  print("\ncreating html string...\n")
 
   stylePath = "./style.css"
   javascriptPath = "./js/main.js"
@@ -306,14 +367,14 @@ def createHTMLFile(isBlog:bool, articleHTML:dict)->str:
 </body>
 </html>"""
 
-
-  
+  articleHTML.pop("article", None)
+  saveToBlogDB(articleHTML)
 
   return html
 
 def saveHTMLFile(isBlog:bool, fileName:str)->None:
   """
-  Creates an HTML file in either the /blog or / dir
+  Creates an HTML file in either the ./blog or ./ directory
   """
 
   if isBlog:
@@ -322,8 +383,9 @@ def saveHTMLFile(isBlog:bool, fileName:str)->None:
     path = f"{os.getcwd()}/public/{fileName}.html"
 
   try:
-    HTMLString = createHTMLFile(isBlog, createArticle(f"{fileName}.md", isBlog))
+    HTMLString = makeHTMLString(isBlog, createArticle(f"{fileName}.md", isBlog))
   except:
+    print("Couldn't create HTML String.")
     HTMLString = ""
 
   if HTMLString != "":
@@ -396,52 +458,3 @@ while True:
   else:
     continue
 
-def enterTags(nTags=3):
-  
-  tags = []
-
-  # testing
-  if tags == "": return ["test"]
-
-  while nTags > 0:
-
-    tag = input("HashTag: ")
-    tags.append(tag)
-
-    nTags -= 1 
-
-  return tags
-
-# json db
-def saveToBlogDB(data):
-
-  pathToDB = f"{os.getcwd()}/db/blog-info.json"
-  blogInfo = None
-
-  # read and load json as dict
-  with open(pathToDB, "r") as db:
-    blogInfo = json.load(db)
-
-  data["tags"] = enterTags()
-
-  # TODO: append each blog post information, except the html string
-  blogInfo["results"].append(data)
-
-  # clear the data and re-write everything 
-  with open(pathToDB, "w") as db:
-    json.dump(blogInfo, db)
-
-  return blogInfo
-
-
-# print(saveToDB({
-#   "articleName": "test",
-#   "articlePath": "./blog/posts/test.html"
-# }))
-
-# !Important: Only for testing, clearing the blog_info.json
-def clearResults():
-  with open(f"{os.getcwd()}/db/blog_info.json", "w") as db:
-    json.dump({"results": []}, db)
-
-# clearResults()
