@@ -71,3 +71,5 @@ Always use double quotes.
 ```bash
 ~ $ notflix "movie name"
 ```
+
+That is it for today, see you guys soon. 👋🏻

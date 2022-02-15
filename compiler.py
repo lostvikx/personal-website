@@ -4,6 +4,7 @@ import os
 import re
 import datetime
 import json
+import copy
 
 # Parses the md file, outputs html string
 def createArticle(mdFileName:str, isBlog=True):
@@ -121,7 +122,7 @@ def createArticle(mdFileName:str, isBlog=True):
     for alt, link in foundImg:
       global thumbnail
       if thumbnail == "": 
-        print("thumbnail is blank", link)
+        # print("thumbnail is blank", link)
         thumbnail = link
 
       line = re.sub(r"\!\[(.+?)\]\((.+?)\)", f"<img src=\"{link}\" alt=\"{alt}\" loading=\"lazy\" />", line, count=1)
@@ -286,16 +287,17 @@ def enterTags(nTags=3):
   
   tags = []
 
-  # testing
-  if tags == "": return ["test"]
-
   while nTags > 0:
 
-    tag = input("HashTag: ")
+    tag = input("HashTag: ").strip()
+    # testing
+    if tag == "":
+      return "testing"
+
     tags.append(tag)
 
     nTags -= 1 
-
+  
   return tags
 
 # json db
@@ -308,16 +310,45 @@ def saveToBlogDB(data):
   with open(pathToDB, "r") as db:
     blogInfo = json.load(db)
 
-  data["tags"] = enterTags()
+  results = blogInfo["results"]
 
-  # TODO: append each blog post information, except the html string
-  blogInfo["results"].append(data)
+  articlePathHTML = data["pathToHTMLFile"]
+
+  blogFound = False
+  i = 0
+  while i < len(results):
+
+    if articlePathHTML == results[i]["pathToHTMLFile"]:
+      print("article found!!!")
+
+      entirePath = f"{os.getcwd()}/public/{articlePathHTML[2:]}"
+
+      if not os.path.exists(entirePath):
+        print(f"\nFile doesn't exists! Removing it from the DB...\n")
+        results.pop(i)
+        break
+
+      print("\nUpdating the blog post...\n")
+      blogFound = True
+      tags = copy.deepcopy(results[i]["tags"])
+      data["tags"] = tags
+      results[i] = data
+      break
+
+    i += 1
+
+  if not blogFound:
+    print("Adding article tags...")
+    data["tags"] = enterTags()
+    results.append(data)
+
+  print(f"\nNumber of posts saved in DB: {len(results)}\n")
 
   # clear the data and re-write everything 
   with open(pathToDB, "w") as db:
     json.dump(blogInfo, db)
 
-  return blogInfo
+  # return blogInfo
 
 
 # print(saveToBlogDB({
@@ -381,7 +412,7 @@ def makeHTMLString(isBlog:bool, articleHTML:dict)->str:
 
   <div id="article">{articleHTML["article"]}</div>
 
-  <hr />
+  <hr class="footer-line" />
   
   <footer>
     <div>This website was crafted with the help of a lot of ☕ and 💪🏼</div>
@@ -428,7 +459,7 @@ def saveHTMLFile(isBlog:bool, fileName:str)->None:
 
     print(f"Your HTML file: {path}")
   else:
-    print(f"{fileName} doesn't exists!")
+    print(f"err: writing {fileName}")
 
 # Input md file
 fileName = None

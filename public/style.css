@@ -184,3 +184,7 @@ blockquote {
 .quote {
   font-style: italic;
 }
+
+.footer-line {
+  margin-top: 4rem;
+}
