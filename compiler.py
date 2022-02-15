@@ -313,13 +313,13 @@ def saveToBlogDB(data):
   results = blogInfo["results"]
 
   articlePathHTML = data["pathToHTMLFile"]
+  HTMLFileName = articlePathHTML.split("/")[-1]
 
   blogFound = False
   i = 0
   while i < len(results):
 
     if articlePathHTML == results[i]["pathToHTMLFile"]:
-      print("article found!!!")
 
       entirePath = f"{os.getcwd()}/public/{articlePathHTML[2:]}"
 
@@ -337,7 +337,7 @@ def saveToBlogDB(data):
 
     i += 1
 
-  if not blogFound:
+  if not blogFound and HTMLFileName != "index.html":
     print("Adding article tags...")
     data["tags"] = enterTags()
     results.append(data)

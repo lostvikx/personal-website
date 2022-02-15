@@ -72,4 +72,6 @@ Always use double quotes.
 ~ $ notflix "movie name"
 ```
 
+For some reason I can't find the .local/bin file on my younger brother's laptop.
+
 That is it for today, see you guys soon. 👋🏻
