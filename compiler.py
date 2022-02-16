@@ -422,17 +422,19 @@ def makeHTMLString(isBlog:bool, articleHTML:dict)->str:
 
   <div id="article">{articleHTML["article"]}</div>
 
-  <hr class="footer-line" />
-  
-  <footer>
-    <div>This website was crafted with the help of a lot of ☕ and 💪🏼</div>
-    <div class="contact-links">
-      <div><a href="mailto:viknegi0@gmail.com">Mail</a></div>
-      <div><a href="https://github.com/lostvikx" target="_blank" rel="noopener noreferrer">GitHub</a></div>
-      <div><a href="https://twitter.com/lostvikx" target="_blank" rel="noopener noreferrer">Twitter</a></div>
-      <div><a href="https://linkedin.com/in/vikram-singh-negi/" target="_blank" rel="noopener noreferrer">Linkedin</a></div>
-    </div>
-  </footer>
+  <div class="bottom-footer">
+    <hr class="footer-line" />
+    
+    <footer>
+      <div>This website was crafted with the help of a lot of ☕ and 💪🏼</div>
+      <div class="contact-links">
+        <div><a href="mailto:viknegi0@gmail.com">Mail</a></div>
+        <div><a href="https://github.com/lostvikx" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+        <div><a href="https://twitter.com/lostvikx" target="_blank" rel="noopener noreferrer">Twitter</a></div>
+        <div><a href="https://linkedin.com/in/vikram-singh-negi/" target="_blank" rel="noopener noreferrer">Linkedin</a></div>
+      </div>
+    </footer>
+  </div>
 
   <script src="{javascriptPath}" type="module"></script>
 </body>

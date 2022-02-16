@@ -1,6 +1,8 @@
 "use strict";
 
-console.log(window.location.href);
+import { getAllBlogPosts } from "./getBlogPosts.js";
+
+console.log(window.location);
 
 // pre code hightlights
 hljs.highlightAll();
@@ -26,5 +28,13 @@ try {
   updatePostInfo();
 } catch (err) {
   console.log("Reading time was not shown.");
+  // console.log(err);
 }
 
+const pathName = window.location.pathname;
+
+if (pathName === "/blog/" || pathName === "/blog/index.html" || pathName === "/blog/index") {
+  console.log("hello blog index")
+  // run the function to get all posts
+  getAllBlogPosts();
+}

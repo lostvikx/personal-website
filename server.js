@@ -3,7 +3,7 @@
 const express = require("express");
 const app = express();
 
-// This is might not be perfect!
+// This might not be perfect!
 app.use("/", express.static(__dirname + "/public", {extensions:['html']}));
 
 const HOST = "localhost";
@@ -22,6 +22,12 @@ app.listen(PORT, HOST, () => console.log(`listening on http://${HOST}:${PORT}`))
 
 // });
 
+app.get("/blog/all-posts", (req, res) => {
+  res.sendFile(__dirname + "/db/blog-info.json", (err) => {
+    if (err) console.log(err);
+  });
+});
+
 app.get("/github", (req, res) => {
   res.redirect("https://github.com/lostvikx");
 });
@@ -30,9 +36,7 @@ app.get("/blog/posts", (req, res) => {
   res.redirect("/blog");
 });
 
-// TODO: 404 Page
+// TODO: Create a 404 Page
 app.get("*", (req, res) => {
-
-  res.status(404).send("nani? 404 not found");
-
+  res.redirect("/404.html");
 });
