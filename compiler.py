@@ -247,8 +247,8 @@ def createArticle(mdFileName:str, isBlog=True):
       if line != "" and isFirstPara:
         # blogSubject = line
 
-        if len(line) > 150:
-          blogSubject = line[:147] + "..."
+        if len(line) > 50:
+          blogSubject = line[:47].strip() + "..."
         else:
           blogSubject = line
 
@@ -286,7 +286,7 @@ def createArticle(mdFileName:str, isBlog=True):
 def enterTags(nTags=3):
   
   tags = []
-
+  # TODO: add confirmation of tags
   while nTags > 0:
 
     tag = input("HashTag: ").strip()
@@ -321,6 +321,7 @@ def saveToBlogDB(data):
 
     if articlePathHTML == results[i]["pathToHTMLFile"]:
 
+      # check if the HTML file exists in the /blog dir
       entirePath = f"{os.getcwd()}/public/{articlePathHTML[2:]}"
 
       if not os.path.exists(entirePath):
@@ -330,18 +331,23 @@ def saveToBlogDB(data):
 
       print("\nUpdating the blog post...\n")
       blogFound = True
+      # copy the tag from previously saved data
       tags = copy.deepcopy(results[i]["tags"])
       data["tags"] = tags
+      # rest everything gets updated
       results[i] = data
       break
 
     i += 1
 
+  # /blog/index.html doesn't get entered into the db
   if not blogFound and HTMLFileName != "index.html":
     print("Adding article tags...")
     data["tags"] = enterTags()
     results.append(data)
 
+  # update length
+  blogInfo["length"] = len(results)
   print(f"\nNumber of posts saved in DB: {len(results)}\n")
 
   # clear the data and re-write everything 
@@ -459,7 +465,7 @@ def saveHTMLFile(isBlog:bool, fileName:str)->None:
 
     print(f"Your HTML file: {path}")
   else:
-    print(f"err: writing {fileName}")
+    print(f"err: in writing {fileName}")
 
 # Input md file
 fileName = None

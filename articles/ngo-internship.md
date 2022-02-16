@@ -17,10 +17,9 @@ Dharma Bharathi Mission (DBM) India is a humanitarian organization working to cr
 Project Title: Bridging the Digital Divide - An E-learning Project for the Underprivileged.
 
 ## Main Objectives of the Project
-Improve our students’ English reading, writing and speaking skills.
-To teach students the core fundamentals of the English language. Also, to inculcate good morals, so that they can create a better future for themselves.
-
-I worked on their communication, pronunciation, and even their confidence while speaking in English.
+* Improve our students’ English reading, writing and speaking skills.
+* To teach students the core fundamentals of the English language. Also, to inculcate good morals, so that they can create a better future for themselves.
+* I worked on their communication, pronunciation, and even their confidence while speaking in English.
 
 ## Activities Undertaken
 I covered a lot of core fundamental topics of the English subject. This included nouns, pronouns, verbs, adjectives, adverbs, vocabulary, conjunctions, prepositions, punctuation, and reading comprehension. I also tried to incorporate personality development, confidence-building activities and working on the pacing of their speech. 
