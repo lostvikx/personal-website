@@ -1,4 +1,4 @@
-# Welcome To Paradise 👻
+# Welcome To Paradise ✨
 
 This is just a simple website created with by me using a make-shift markdown parser that I made. I really care about this website, so please don't try to hack it.
 

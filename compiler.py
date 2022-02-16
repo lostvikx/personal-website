@@ -34,10 +34,14 @@ def createArticle(mdFileName:str, isBlog=True):
     headerId = "-".join(re.sub(r"[\W_]+", " ", headerText).strip().lower().split(" "))
     header = f"<h{len(headerType)} id=\"{headerId}\"><a href=\"#{headerId}\" class=\"topic\">{headerText}</a></h{len(headerType)}>"
     
-    if len(headerType) == 1:
+    # only show post-info if blog post
+    if len(headerType) == 1 and isBlog and mdFileName != "index.md":
       global timeCreated
       title = headerText
       header += f"<div id=\"post-info\"><p class=\"post-meta\">{timeCreated}, Author: Vikram S. Negi</p></div>"
+      return [header, title]
+    elif len(headerType) == 1:
+      title = headerText
       return [header, title]
     else:
       return header
@@ -398,11 +402,11 @@ def makeHTMLString(isBlog:bool, articleHTML:dict)->str:
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>lostvikx | {articleHTML["postTitle"] or "Home"}</title>
+  <title>{articleHTML["postTitle"] or "Home"} - lostvikx</title>
   <link rel="stylesheet" href="{stylePath}">
   <link 
     rel="icon"
-    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💀</text></svg>"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❄️</text></svg>"
   >
   {codeBlockTags["css"] or ""}
   {codeBlockTags["js"] or ""}

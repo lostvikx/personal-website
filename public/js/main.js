@@ -22,5 +22,9 @@ const updatePostInfo = () => {
   postInfo.appendChild(readingTime);
 }
 
-updatePostInfo();
+try {
+  updatePostInfo();
+} catch (err) {
+  console.log("Reading time was not shown.");
+}
 
