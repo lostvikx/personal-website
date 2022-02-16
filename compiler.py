@@ -37,7 +37,7 @@ def createArticle(mdFileName:str, isBlog=True):
     if len(headerType) == 1:
       global timeCreated
       title = headerText
-      header += f"<p class=\"post-info\">{timeCreated}, Author: Vikram S. Negi</p>"
+      header += f"<div id=\"post-info\"><p class=\"post-meta\">{timeCreated}, Author: Vikram S. Negi</p></div>"
       return [header, title]
     else:
       return header

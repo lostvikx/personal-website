@@ -166,11 +166,15 @@ hr {
   margin: 1rem auto 2rem;
 }
 
-.post-info {
-  margin-bottom: 1rem;
+.post-meta {
+  padding: 0.25em 0 !important;
   font-style: italic;
-  font-size: 0.75rem;
+  font-size: 0.95rem !important;
   color: var(--grey);
+}
+
+#post-info {
+  margin-bottom: 1rem;
 }
 
 blockquote {
