@@ -11,14 +11,14 @@ def createArticle(mdFileName:str, isBlog=True):
   """
   mdFileName: md file name
 
-  return: { article, blogTitle, blogSubject, timeCreated }
+  return: { article, postTitle, postSubject, timeCreated }
   """
 
   # TODO: Add tags to articles, maybe a custom syntax in the markdown file
 
   article = ""
-  blogTitle = ""
-  blogSubject = None
+  postTitle = ""
+  postSubject = None
   # global variables
   global timeCreated
   timeCreated = datetime.datetime.now().strftime("%a %b %d %X %Y")
@@ -188,7 +188,7 @@ def createArticle(mdFileName:str, isBlog=True):
 
         if type(headerOut) == list:
           headerTag = headerOut[0]
-          blogTitle += headerOut[1]
+          postTitle += headerOut[1]
         else:
           headerTag = headerOut
 
@@ -245,12 +245,12 @@ def createArticle(mdFileName:str, isBlog=True):
         line = ""
 
       if line != "" and isFirstPara:
-        # blogSubject = line
+        # postSubject = line
 
         if len(line) > 50:
-          blogSubject = line[:47].strip() + "..."
+          postSubject = line[:47].strip() + "..."
         else:
-          blogSubject = line
+          postSubject = line
 
         line = f"<p>{line}</p>"
         isFirstPara = False
@@ -274,8 +274,8 @@ def createArticle(mdFileName:str, isBlog=True):
   return {
     "article": article,
     "pathToHTMLFile": pathToHTMLFile,
-    "blogTitle": blogTitle,
-    "blogSubject": blogSubject,
+    "postTitle": postTitle,
+    "postSubject": postSubject,
     "timeCreated": timeCreated,
     "thumbnail": thumbnail
   }
@@ -398,7 +398,7 @@ def makeHTMLString(isBlog:bool, articleHTML:dict)->str:
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>lostvikx | {articleHTML["blogTitle"] or "Home"}</title>
+  <title>lostvikx | {articleHTML["postTitle"] or "Home"}</title>
   <link rel="stylesheet" href="{stylePath}">
   <link 
     rel="icon"
