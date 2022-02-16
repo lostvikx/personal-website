@@ -249,7 +249,6 @@ def createArticle(mdFileName:str, isBlog=True):
         line = ""
 
       if line != "" and isFirstPara:
-        # postSubject = line
 
         if len(line) > 50:
           postSubject = line[:47].strip() + "..."
@@ -270,10 +269,12 @@ def createArticle(mdFileName:str, isBlog=True):
   fileCom = mdFileName.split(".")
   fileName = "".join(fileCom[:-1])
 
-  if isBlog:
-    pathToHTMLFile = f"./blog/{fileName}.html"
-  else:
-    pathToHTMLFile = f"./{fileName}.html"
+  # if isBlog:
+  #   pathToHTMLFile = f"./blog/{fileName}.html"
+  # else:
+  #   pathToHTMLFile = f"./{fileName}.html"
+
+  pathToHTMLFile = f"./{fileName}.html"
 
   return {
     "article": article,
