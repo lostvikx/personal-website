@@ -197,8 +197,8 @@ blockquote {
 }
 
 #all-posts {
-  margin: 0.5rem 1rem;
-  border: #ff4081 2px solid;
+  margin: 0 1rem 1rem;
+  /* border: #ff4081 2px solid; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -208,7 +208,7 @@ blockquote {
 
 .post {
   display: block;
-  border: #00FF00 2px solid;
+  /* border: #00FF00 2px solid; */
   /* margin: 1rem 0.25rem; */
   border-radius: 5px;
 }
@@ -219,7 +219,7 @@ blockquote {
 
 .post-div {
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
@@ -227,7 +227,7 @@ blockquote {
 }
 
 .post-img {
-  width: 100%;
+  width: 25%;
   /* overflow: hidden; */
 }
 
@@ -260,4 +260,20 @@ blockquote {
   font-style: italic;
   font-size: 0.8rem;
   color: var(--grey);
+}
+
+@media only screen and (max-width: 600px) {
+  
+  .post-div {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .post-img {
+    width: 100%;
+    /* overflow: hidden; */
+  }
+
 }
