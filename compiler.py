@@ -305,6 +305,21 @@ def enterTags(nTags=3):
   
   return tags
 
+def updateCategoryTagsDB(tags:list):
+
+  pathToDB = f"{os.getcwd()}/db/category-tags.json"
+  tagFreqDict = None
+
+  with open(pathToDB, "r") as db:
+    tagFreqDict = json.load(db)
+
+  for tag in tags:
+    tagFreqDict[tag] = tagFreqDict.get(tag, 0) + 1
+
+  with open(pathToDB, "w") as db:
+    json.dump(tagFreqDict, db)
+
+
 # json db
 def saveToBlogDB(data):
 
@@ -317,6 +332,8 @@ def saveToBlogDB(data):
 
   results = blogInfo["results"]
 
+  # updateCategoryTagsDB(data["tags"])
+
   articlePathHTML = data["pathToHTMLFile"]
   HTMLFileName = articlePathHTML.split("/")[-1]
 
@@ -327,7 +344,7 @@ def saveToBlogDB(data):
     if articlePathHTML == results[i]["pathToHTMLFile"]:
 
       # check if the HTML file exists in the /blog dir
-      entirePath = f"{os.getcwd()}/public/{articlePathHTML[2:]}"
+      entirePath = f"{os.getcwd()}/public/blog/{articlePathHTML[2:]}"
 
       if not os.path.exists(entirePath):
         print(f"\nFile doesn't exists! Removing it from the DB...\n")
@@ -362,10 +379,6 @@ def saveToBlogDB(data):
   # return blogInfo
 
 
-# print(saveToBlogDB({
-#   "articleName": "test",
-#   "articlePath": "./blog/posts/test.html"
-# }))
 
 # !Important: Only for testing, clearing the blog_info.json
 def clearResults():
