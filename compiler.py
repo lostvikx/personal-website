@@ -294,34 +294,38 @@ def enterTags(nTags=3):
   # TODO: add confirmation of tags
   while nTags > 0:
 
-    tag = input("HashTag: ").strip()
-    # testing
-    if tag == "":
-      return "testing"
-
+    tag = input("HashTag: ").strip().lower().replace(" ", "_") or "misc"
     tags.append(tag)
 
     nTags -= 1 
   
   return tags
 
-def updateCategoryTagsDB(tags:list):
+def updateCategoryTagsDB(HTMLPath:str, tags:list):
+
+  post = ".".join(HTMLPath[2:].split(".")[:-1 or None])
 
   pathToDB = f"{os.getcwd()}/db/category-tags.json"
-  tagFreqDict = None
+  tagDict = None  # {"posts": [], "tagFrequency": {}}
 
   with open(pathToDB, "r") as db:
-    tagFreqDict = json.load(db)
+    tagDict = json.load(db)
 
-  for tag in tags:
-    tagFreqDict[tag] = tagFreqDict.get(tag, 0) + 1
+  if post in tagDict["posts"]:
+    print(f"\nTag info of {post} is already in CategoryTagsDB\n")
+  else:
+    tagDict["posts"].append(post)
+    for tag in tags:
+      tagDict["tagFrequency"][tag] = tagDict["tagFrequency"].get(tag, 0) + 1
+
+    print(f"\n{len(tagDict['posts'])} posts info saved in CategoryTagsDB\n")
 
   with open(pathToDB, "w") as db:
-    json.dump(tagFreqDict, db)
+    json.dump(tagDict, db)
 
 
 # json db
-def saveToBlogDB(data):
+def saveToBlogDB(data:dict):
 
   pathToDB = f"{os.getcwd()}/db/blog-info.json"
   blogInfo = None
@@ -331,8 +335,6 @@ def saveToBlogDB(data):
     blogInfo = json.load(db)
 
   results = blogInfo["results"]
-
-  # updateCategoryTagsDB(data["tags"])
 
   articlePathHTML = data["pathToHTMLFile"]
   HTMLFileName = articlePathHTML.split("/")[-1]
@@ -370,11 +372,14 @@ def saveToBlogDB(data):
 
   # update length
   blogInfo["length"] = len(results)
-  print(f"\nNumber of posts saved in DB: {len(results)}\n")
+  print(f"\nNumber of posts saved in BlogInfoDB: {len(results)}\n")
 
   # clear the data and re-write everything 
   with open(pathToDB, "w") as db:
     json.dump(blogInfo, db)
+
+  # print(data["pathToHTMLFile"], data["tags"])
+  updateCategoryTagsDB(data["pathToHTMLFile"], data["tags"])
 
   # return blogInfo
 
