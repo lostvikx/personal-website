@@ -95,9 +95,9 @@ def createArticle(mdFileName:str, isBlog=True):
     return list
 
   def makeCode(line):
-    foundCode = re.findall(r"\`([\w ]*?)\`", line)
+    foundCode = re.findall(r"\`(.+?)\`", line)
     for text in foundCode:
-      line = re.sub(r"\`[\w ]*?\`", f"<code>{text}</code>", line, count=1)
+      line = re.sub(r"\`.+?\`", f"<code>{text}</code>", line, count=1)
 
     if foundCode:
       return line

@@ -144,8 +144,10 @@ footer div {
 }
 
 code {
-  font-size: 0.8rem;
   border-radius: 5px;
+  color: var(--yellow);
+  background-color: var(--alt-bg);
+  font-family: monospace;
 }
 
 #article p {
