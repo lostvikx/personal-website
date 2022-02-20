@@ -43,8 +43,8 @@ if (pathName === "/blog/" || pathName === "/blog/index.html" || pathName === "/b
   // get all posts
   const allPosts = await getAllBlogPosts();
 
-  // TODO: sorting by latest
-  // TODO: create meta-attribute for article tags
+  // TODO [*]: sorting by latest
+  // TODO [ ]: create meta-attribute for article tags
 
   console.log(allPosts);
 
