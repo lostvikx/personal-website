@@ -2,7 +2,7 @@
 
 Is FinTech really the next big thing?
 
-![FinTech Img](https://images.unsplash.com/photo-1559526324-593bc073d938?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)
+![FinTech Img](./imgs/fintech-info.avif)
 
 ---
 

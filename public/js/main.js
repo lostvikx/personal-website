@@ -43,10 +43,10 @@ if (pathName === "/blog/" || pathName === "/blog/index.html" || pathName === "/b
 
   console.log(allPosts);
 
-  const allPostsUl = document.getElementById("all-posts");
+  const allPostsDiv = document.getElementById("all-posts");
 
   for (const post of allPosts) {
-    allPostsUl.appendChild(createPost(post));
+    allPostsDiv.appendChild(createPost(post));
   }
 
   

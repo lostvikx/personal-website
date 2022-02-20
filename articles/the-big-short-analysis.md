@@ -2,7 +2,7 @@
 
 I recently watched The Big Short, a film about the housing crisis caused by mortgage backed securities in the United States of America. I describe less of what happened in the movie, focusing more on what and how the crisis occured. 
 
-![screenshot from the movie](https://m.wsj.net/video/20151212/121215adammckay/121215adammckay_960x540.jpg)
+![screenshot from the movie](./imgs/the-big-short.jpg)
 
 ---
 
