@@ -18,6 +18,12 @@ app.get("/blog/all-posts", (req, res) => {
   });
 });
 
+app.get("/blog/category-tags", (req, res) => {
+  res.sendFile(__dirname + "/db/category-tags.json", (err) => {
+    if (err) console.log(err);
+  });
+});
+
 app.get("/github", (req, res) => {
   res.redirect("https://github.com/lostvikx");
 });
@@ -26,7 +32,7 @@ app.get("/blog/posts", (req, res) => {
   res.redirect("/blog");
 });
 
-// TODO: Create a 404 Page
+// TODO [*]: Create a 404 Page
 app.get("*", (req, res) => {
   res.redirect("/404.html");
 });

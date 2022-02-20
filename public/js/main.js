@@ -1,6 +1,7 @@
 "use strict";
 
-import { getAllBlogPosts, createPost } from "./getBlogPosts.js";
+import { getAllBlogPosts, createPost } from "./blogPosts.js";
+import { getCategoryTags, createTag } from "./categoryTags.js";
 
 console.log(window.location);
 
@@ -40,19 +41,24 @@ if (isBlogPost) {
 
 if (pathName === "/blog/" || pathName === "/blog/index.html" || pathName === "/blog/index") {
   
-  // get all posts
-  const allPosts = await getAllBlogPosts();
-
   // TODO [*]: sorting by latest
   // TODO [ ]: create meta-attribute for article tags
 
-  console.log(allPosts);
+  const [ allPosts, allTags ] = await Promise.all([getAllBlogPosts(), getCategoryTags()]);
 
+  // Posts
   const allPostsDiv = document.getElementById("all-posts");
 
   for (const post of allPosts) {
     allPostsDiv.appendChild(createPost(post));
   }
 
-  
+  // Tags
+  console.log(allTags);
+  const postTags = document.getElementById("post-tags");
+
+  for (const [ name, frequency ] of Object.entries(allTags.tagFrequency)) {
+    postTags.appendChild(createTag(name, frequency));
+  }
+
 }

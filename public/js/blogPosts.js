@@ -2,10 +2,14 @@
 
 const getAllBlogPosts = async () => {
 
-  const res = await fetch("/blog/all-posts");
-  const data = await res.json();
-  
-  return data["results"];
+  try {
+    const res = await fetch("/blog/all-posts");
+    const data = await res.json();
+    
+    return data["results"];
+  } catch (err) {
+    console.error(err, "getAllBlogPosts failed!");
+  }
 
 }
 
