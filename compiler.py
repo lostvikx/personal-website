@@ -358,6 +358,8 @@ def saveToBlogDB(data:dict):
       # copy the tag from previously saved data
       tags = copy.deepcopy(results[i]["tags"])
       data["tags"] = tags
+      timeCreated = results[i]["timeCreated"]
+      data["timeCreated"] = timeCreated
       # rest everything gets updated
       results[i] = data
       break
@@ -368,21 +370,29 @@ def saveToBlogDB(data:dict):
   if not blogFound and HTMLFileName != "index.html":
     print("Adding article tags...")
     data["tags"] = enterTags()
-    results.append(data)
+    updateCategoryTagsDB(data["pathToHTMLFile"], data["tags"])
+
+    # results.append(data)
+    results.insert(0, data)
 
   # update length
   blogInfo["length"] = len(results)
   print(f"\nNumber of posts saved in BlogInfoDB: {len(results)}\n")
 
-  # clear the data and re-write everything 
+  # sorry, this sorting idea was useless because we can just insert the new object at zero index
+  # try:
+  #   sortedList = sorted(results, key=lambda post: datetime.datetime.strptime(post["timeCreated"], "%a %b %d %X %Y"), reverse=True)
+  # except:
+  #   print("Couldn't sort blog-info db")
+
+  # print(sortedList)
+  # blogInfo["results"] = sortedList
+
+  # clear the data and re-write everything
   with open(pathToDB, "w") as db:
     json.dump(blogInfo, db)
 
   # print(data["pathToHTMLFile"], data["tags"])
-  updateCategoryTagsDB(data["pathToHTMLFile"], data["tags"])
-
-  # return blogInfo
-
 
 
 # !Important: Only for testing, clearing the blog_info.json
