@@ -39,26 +39,35 @@ if (isBlogPost) {
   }
 }
 
+const renderPosts = (posts) => {
+  const allPostsDiv = document.getElementById("all-posts");
+
+  for (const post of posts) {
+    allPostsDiv.appendChild(createPost(post));
+  }
+}
+
 if (pathName === "/blog/" || pathName === "/blog/index.html" || pathName === "/blog/index") {
   
-  // TODO [*]: sorting by latest
-  // TODO [ ]: create meta-attribute for article tags
+  // TODO [ ]: create meta-attribute for article tags, filtering
+  // TODO [ ]: don't get all posts, get about 20 posts, use url query
 
   const [ allPosts, allTags ] = await Promise.all([getAllBlogPosts(), getCategoryTags()]);
 
   // Posts
-  const allPostsDiv = document.getElementById("all-posts");
-
-  for (const post of allPosts) {
-    allPostsDiv.appendChild(createPost(post));
-  }
+  renderPosts(allPosts);
 
   // Tags
-  console.log(allTags);
+  // TODO [*]: sorting by latest
+  const tagFrequencyArray = Object.entries(allTags.tagFrequency).sort((a, b) => (a[1] < b[1]) ? 1 : (a[1] === b[1]) ? 0 : -1);
+
+  console.log(tagFrequencyArray);
   const postTags = document.getElementById("post-tags");
 
-  for (const [ name, frequency ] of Object.entries(allTags.tagFrequency)) {
+  for (const [ name, frequency ] of tagFrequencyArray) {
     postTags.appendChild(createTag(name, frequency));
   }
+
+  // TODO [ ]: show only the top 5 tags, rest in show more drop down
 
 }
