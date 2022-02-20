@@ -153,6 +153,7 @@ code {
 #article p {
   font-size: 1rem;
   padding: 0.4em 0;
+  text-align: justify;
 }
 
 #article pre {
@@ -196,6 +197,7 @@ blockquote {
 
 .quote {
   font-style: italic;
+  text-align: left !important;
 }
 
 #all-posts {
@@ -225,7 +227,7 @@ blockquote {
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
-  margin: 0.25rem;
+  padding: 0.25em;
 }
 
 .post-img {
