@@ -58,13 +58,13 @@ const createPost = (data) => {
 const getTagPosts = async (tagName) => {
 
   const urlEndPoint = `/blog/tag?name=${tagName}`;
-  console.log(urlEndPoint);
+  // console.log(urlEndPoint);
 
   try {
     const res = await fetch(urlEndPoint);
-    console.log(res);
-    // const data = await res.json();
-    // console.log(data);
+    const data = await res.json();
+
+    return data;
 
   } catch (err) {
     console.error(err, "getTagPosts failed!");
@@ -72,4 +72,14 @@ const getTagPosts = async (tagName) => {
 
 }
 
-export { getAllBlogPosts, createPost, getTagPosts };
+const renderPosts = (posts) => {
+  const allPostsDiv = document.getElementById("all-posts");
+
+  allPostsDiv.textContent = "";
+
+  for (const post of posts) {
+    allPostsDiv.appendChild(createPost(post));
+  }
+}
+
+export { getAllBlogPosts, createPost, getTagPosts, renderPosts };

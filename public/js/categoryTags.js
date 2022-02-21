@@ -1,6 +1,6 @@
 "use strict";
 
-import { getTagPosts } from "./blogPosts.js";
+import { getTagPosts, renderPosts } from "./blogPosts.js";
 
 
 const getCategoryTags = async () => {
@@ -29,15 +29,25 @@ const createTag = (name, frequency) => {
 
   div.appendChild(span);
 
-  div.addEventListener("click", (evt) => {
+  // div.tabindex = -1;
+
+  div.addEventListener("click", async (evt) => {
 
     evt.preventDefault();
     const tagName = evt.target.textContent.slice(1,).split(" ")[0];
 
     // console.log(tagName);
-    getTagPosts(tagName);
+    const postsWithTag = await getTagPosts(tagName);
+    // console.log(postsWithTag);
+
+    renderPosts(postsWithTag);
 
   });
+
+  // div.addEventListener("blur", (evt) => {
+  //   evt.preventDefault();
+  //   console.log("on blur");
+  // });
 
   return div;
 

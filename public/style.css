@@ -301,3 +301,7 @@ blockquote {
   cursor: pointer;
   background-color: var(--grey);
 }
+
+.tag:focus-within {
+  background-color: var(--grey);
+} 

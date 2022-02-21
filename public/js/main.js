@@ -1,6 +1,6 @@
 "use strict";
 
-import { getAllBlogPosts, createPost } from "./blogPosts.js";
+import { getAllBlogPosts, createPost, renderPosts } from "./blogPosts.js";
 import { getCategoryTags, createTag } from "./categoryTags.js";
 
 console.log(window.location);
@@ -36,14 +36,6 @@ if (isBlogPost) {
   } catch (err) {
     console.log("Reading time was not shown.");
     // console.log(err);
-  }
-}
-
-const renderPosts = (posts) => {
-  const allPostsDiv = document.getElementById("all-posts");
-
-  for (const post of posts) {
-    allPostsDiv.appendChild(createPost(post));
   }
 }
 
