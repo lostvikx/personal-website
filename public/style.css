@@ -284,4 +284,20 @@ blockquote {
 
 #post-tags {
   margin: 0 1rem 1rem;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.25rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.tag {
+  background-color: var(--alt-bg);
+  padding: 0.25em;
+  border-radius: 5px;
+}
+
+.tag:hover {
+  cursor: pointer;
+  background-color: var(--grey);
 }

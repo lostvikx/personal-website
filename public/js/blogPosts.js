@@ -55,4 +55,20 @@ const createPost = (data) => {
   return post;
 }
 
-export { getAllBlogPosts, createPost }
+const getTagPosts = async (tagName) => {
+
+  const urlEndPoint = `/blog/tag?name=${tagName}`;
+
+  try {
+    const res = await fetch(urlEndPoint);
+    console.log(res);
+    // const data = await res.json();
+    // console.log(data);
+
+  } catch (err) {
+    console.error(err, "getTagPosts failed!");
+  }
+
+}
+
+export { getAllBlogPosts, createPost, getTagPosts };

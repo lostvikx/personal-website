@@ -1,5 +1,8 @@
 "use strict";
 
+import { getTagPosts } from "./blogPosts.js";
+
+
 const getCategoryTags = async () => {
 
   try {
@@ -13,14 +16,31 @@ const getCategoryTags = async () => {
 
 }
 
+// TODO [ ]: add some colors to tags
 const createTag = (name, frequency) => {
 
   const div = document.createElement("div");
-  div.textContent = `#${name} ${frequency}`;
+  div.textContent = `#${name} `;
   div.className = "tag";
+
+  const span = document.createElement("span");
+  span.textContent = `${frequency}`;
+  span.className = "freq";
+
+  div.appendChild(span);
+
+  div.addEventListener("click", (evt) => {
+
+    evt.preventDefault();
+    const tagName = evt.target.textContent.slice(1,).split(" ")[0];
+
+    // console.log(tagName);
+    getTagPosts(tagName);
+
+  });
 
   return div;
 
 }
 
-export { getCategoryTags, createTag }
+export { getCategoryTags, createTag };
