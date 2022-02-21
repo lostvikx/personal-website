@@ -58,6 +58,7 @@ const createPost = (data) => {
 const getTagPosts = async (tagName) => {
 
   const urlEndPoint = `/blog/tag?name=${tagName}`;
+  console.log(urlEndPoint);
 
   try {
     const res = await fetch(urlEndPoint);
