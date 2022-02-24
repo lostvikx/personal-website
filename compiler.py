@@ -301,6 +301,8 @@ def enterTags(nTags=3):
   
   return tags
 
+
+
 def updateCategoryTagsDB(HTMLPath:str, tags:list):
 
   post = ".".join(HTMLPath[2:].split(".")[:-1 or None])
@@ -322,7 +324,6 @@ def updateCategoryTagsDB(HTMLPath:str, tags:list):
 
   with open(pathToDB, "w") as db:
     json.dump(tagDict, db)
-
 
 # json db
 def saveToBlogDB(data:dict):
@@ -372,21 +373,11 @@ def saveToBlogDB(data:dict):
     data["tags"] = enterTags()
     updateCategoryTagsDB(data["pathToHTMLFile"], data["tags"])
 
-    # results.append(data)
     results.insert(0, data)
 
   # update length
   blogInfo["length"] = len(results)
   print(f"\nNumber of posts saved in BlogInfoDB: {len(results)}\n")
-
-  # sorry, this sorting idea was useless because we can just insert the new object at zero index
-  # try:
-  #   sortedList = sorted(results, key=lambda post: datetime.datetime.strptime(post["timeCreated"], "%a %b %d %X %Y"), reverse=True)
-  # except:
-  #   print("Couldn't sort blog-info db")
-
-  # print(sortedList)
-  # blogInfo["results"] = sortedList
 
   # clear the data and re-write everything
   with open(pathToDB, "w") as db:
@@ -400,7 +391,7 @@ def clearResults():
   with open(f"{os.getcwd()}/db/blog-info.json", "w") as db:
     json.dump({"results": []}, db)
 
-# clearResults()
+
 
 # Create entire HTML string
 def makeHTMLString(isBlog:bool, articleHTML:dict)->str:
@@ -469,9 +460,10 @@ def makeHTMLString(isBlog:bool, articleHTML:dict)->str:
 </body>
 </html>"""
 
-  # rm article, html string, from the object
+  # rm article (the html string) from the object
   articleHTML.pop("article", None)
 
+  # only blog posts get saved to the DB
   if isBlog:
     saveToBlogDB(articleHTML)
 
@@ -502,7 +494,7 @@ def saveHTMLFile(isBlog:bool, fileName:str)->None:
   else:
     print(f"err: in writing {fileName}")
 
-# Input md file
+# Input a markdown file
 fileName = None
 while True:
 
