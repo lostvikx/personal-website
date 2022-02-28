@@ -32,7 +32,8 @@ def createArticle(mdFileName:str, isBlog=True):
     headerType, *text = line.split(" ")
     headerText = " ".join(text)
     headerId = "-".join(re.sub(r"[\W_]+", " ", headerText).strip().lower().split(" "))
-    header = f"<h{len(headerType)} id=\"{headerId}\"><a href=\"#{headerId}\" class=\"topic\">{headerText}</a></h{len(headerType)}>"
+    # header = f"<h{len(headerType)} id=\"{headerId}\"><a href=\"#{headerId}\" class=\"topic\">{headerText}</a></h{len(headerType)}>"
+    header = f"<h{len(headerType)} id=\"{headerId}\" class=\"topic\">{headerText}</h{len(headerType)}>"
     
     # only show post-info if blog post
     if len(headerType) == 1 and isBlog and mdFileName != "index.md":
@@ -129,7 +130,8 @@ def createArticle(mdFileName:str, isBlog=True):
         # print("thumbnail is blank", link)
         thumbnail = link
 
-      line = re.sub(r"\!\[(.+?)\]\((.+?)\)", f"<img src=\"{link}\" alt=\"{alt}\" loading=\"lazy\" />", line, count=1)
+      # line = re.sub(r"\!\[(.+?)\]\((.+?)\)", f"<img src=\"{link}\" alt=\"{alt}\" loading=\"lazy\" />", line, count=1)
+      line = re.sub(r"\!\[(.+?)\]\((.+?)\)", f"<figure><img src=\"{link}\" alt=\"{alt}\" loading=\"lazy\" /><figcaption>Figure 1. {alt}</figcaption></figure>", line, count=1)
 
     if foundImg:
       return line
@@ -166,13 +168,15 @@ def createArticle(mdFileName:str, isBlog=True):
     for line in f:
       # cross site scripting (xss) security reason
       # line = line.replace("<", "&lt;").replace(">", "&gt;")
+
+      # for some reason the following replace method, replaces "!" with "<"
+      if isImg(line):
+        article += makeImg(line)
+        line = ""
+
       line = line.replace("<", "&lt;")
 
       if not inCodeBlock: line = line.strip()
-
-      # if isImg(line):
-      #   article += makeImg(line)
-      #   line = ""
 
       # Check this, if any errors regarding imgs
       line = makeImg(line) or line

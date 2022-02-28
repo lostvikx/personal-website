@@ -1,5 +1,5 @@
 :root {
-  --text: #fdfdfd;
+  --text: rgb(219, 219, 219);
   --blue: #00bcd4;
   --bg-color: #161616;
   --pink: #ff4081;
@@ -7,6 +7,7 @@
   --yellow: #FFFF00;
   --alt-bg: #252525;
   --grey: rgb(131, 131, 131);
+  --header-color: #fdfdfd;
 }
 
 * {
@@ -103,7 +104,7 @@ footer div {
 
 /* all headers class */
 .topic {
-  color: var(--text);
+  color: var(--header-color);
 }
 
 #article a:hover {
@@ -136,11 +137,20 @@ footer div {
   padding: 0.25em;
 }
 
-#article img {
+/* #article img {
   max-width: 100%;
   display: block;
   margin: 1rem auto;
   border-radius: 5px;
+} */
+
+#article img {
+  max-width: 100%;
+  max-height: 400px;
+  display: block;
+  margin: 1rem auto;
+  border-radius: 5px;
+  object-fit: cover;
 }
 
 code {
@@ -171,7 +181,7 @@ code {
 }
 
 hr {
-  width: 90%;
+  width: 80%;
   opacity: 70%;
   margin: 1rem auto 2rem;
 }
@@ -181,6 +191,17 @@ hr {
   font-style: italic;
   font-size: 0.95rem !important;
   color: var(--grey);
+}
+
+figcaption {
+  padding: 0.25em 0 !important;
+  font-style: italic;
+  font-size: 0.90rem !important;
+  color: var(--grey);
+}
+
+.img-cap {
+  color: var(--text);
 }
 
 #post-info {
@@ -199,6 +220,10 @@ blockquote {
   font-style: italic;
   /* text-align: left !important; */
 }
+
+
+
+/* All blog posts page */
 
 #all-posts {
   margin: 0 1rem 1rem;
