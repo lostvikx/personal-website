@@ -325,6 +325,9 @@ def enterTags(nTags=3):
 
 
 def updateCategoryTagsDB(HTMLPath:str, tags:list):
+  """
+  updates the category tags db
+  """
 
   post = ".".join(HTMLPath[2:].split(".")[:-1 or None])
 
@@ -348,6 +351,9 @@ def updateCategoryTagsDB(HTMLPath:str, tags:list):
 
 # json db
 def saveToBlogDB(data:dict):
+  """
+  saves the post meta data, like postTitle, to db
+  """
 
   pathToDB = f"{os.getcwd()}/db/blog-info.json"
   blogInfo = None
@@ -492,7 +498,7 @@ def makeHTMLString(isBlog:bool, articleHTML:dict)->str:
 
 def saveHTMLFile(isBlog:bool, fileName:str)->None:
   """
-  Creates an HTML file in either the ./blog or ./ directory
+  Creates an HTML file in either the ./blog or ./ (root directory)
   """
 
   if isBlog:
