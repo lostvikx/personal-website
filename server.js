@@ -24,7 +24,7 @@ app.get("/blog/all-posts", (req, res) => {
 
 });
 
-// TODO: implement cache on server
+// TODO [ ]: implement cache on server
 app.get("/blog/tag", async (req, res) => {
 
   const tagName = req.query["name"];

@@ -11,7 +11,17 @@ def createArticle(mdFileName:str, isBlog=True):
   """
   mdFileName: md file name
 
-  return: { article, postTitle, postSubject, timeCreated }
+  isBlog: boolean
+
+  Returns: { article, postTitle, postSubject, timeCreated }
+
+  article: the blog post in HTML string to be injected
+
+  postTitle: h1
+
+  postSubject: initial 50 chars of first para
+
+  timeCreated: datetime, updates when the function is called
   """
 
   # TODO: Add tags to articles, maybe a custom syntax in the markdown file
@@ -293,6 +303,13 @@ def createArticle(mdFileName:str, isBlog=True):
 # print(createArticle("fintech-info.md"))
 
 def enterTags(nTags=3):
+  """
+  Asks user to input hashtags, for blog posts
+
+  3 tags by default
+
+  Returns: an array of tags
+  """
   
   tags = []
   # TODO: add confirmation of tags
