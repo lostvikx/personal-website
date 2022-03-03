@@ -413,6 +413,9 @@ def saveToBlogDB(data:dict):
   # print(data["pathToHTMLFile"], data["tags"])
 
 
+
+
+
 # !Important: Only for testing, clearing the blog-info.json
 def clearResults():
   with open(f"{os.getcwd()}/db/blog-info.json", "w") as db:
