@@ -34,6 +34,8 @@ def createArticle(mdFileName:str, isBlog=True):
   timeCreated = datetime.datetime.now().strftime("%a %b %d %X %Y")
   global thumbnail
   thumbnail = ""
+  global numImgFound
+  numImgFound = -1
 
   def isHeader(line):
     return line[0:1] == "#" and line != ""
@@ -134,14 +136,32 @@ def createArticle(mdFileName:str, isBlog=True):
   def makeImg(line):
     foundImg = re.findall(r"\!\[(.+?)\]\((.+?)\)", line)
 
-    for alt, link in foundImg:
+    if foundImg:
+      global numImgFound
+      numImgFound += len(foundImg)
+
+    for alt, linkAndCaption in foundImg:
+
+      # print(linkAndCaption)
+
+      try:
+        link, *caption = linkAndCaption.split(" ")
+      except:
+        # print("no caption was found!")
+        link = linkAndCaption
+        caption = []
+
+      # print(caption)
+
       global thumbnail
       if thumbnail == "": 
         # print("thumbnail is blank", link)
         thumbnail = link
 
-      # line = re.sub(r"\!\[(.+?)\]\((.+?)\)", f"<img src=\"{link}\" alt=\"{alt}\" loading=\"lazy\" />", line, count=1)
-      line = re.sub(r"\!\[(.+?)\]\((.+?)\)", f"<figure><img src=\"{link}\" alt=\"{alt}\" loading=\"lazy\" /><figcaption>Figure 1. {alt}</figcaption></figure>", line, count=1)
+      if len(caption) == 0:
+        line = re.sub(r"\!\[(.+?)\]\((.+?)\)", f"<figure><img src=\"{link}\" alt=\"{alt}\" loading=\"lazy\" /></figure>", line, count=1)
+      else:
+        line = re.sub(r"\!\[(.+?)\]\((.+?)\)", f"<figure><img src=\"{link}\" alt=\"{alt}\" loading=\"lazy\" /><figcaption>Figure {numImgFound}. {' '.join(caption)[1:-1]}</figcaption></figure>", line, count=1)
 
     if foundImg:
       return line

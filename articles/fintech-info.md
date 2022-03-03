@@ -2,7 +2,7 @@
 
 Is FinTech really the next big thing?
 
-![FinTech Img](./imgs/fintech-info.avif)
+![fintech application](./imgs/fintech-info.avif)
 
 ---
 
@@ -29,6 +29,9 @@ Online banking is at the heart of the operation of a fintech firm. Especially mo
 Apart from money transactions, few fintech firms are providing consumers access to invest their money in the equity market, the stock market. One such likely candidate is Zerodha, a company based in Bangalore, which is the largest retail stockbroker in India with an active client base. It contributes upwards of 15% of daily retail volumes across the Indian stock exchanges.
 
 ## What are Neobanks?
+
+![not a neobank](./imgs/neo-bank-not.avif "Clearly this is not how a neobank looks like")
+
 A neobank, also known as an online bank or a digital bank is a virtual bank that operates exclusively online without traditional physical branch networks. Neobank is a fintech firm that provides digital and mobile-first financial solutions like payments, money transfers, money lending, and more.
 
 Consumers are moving away from physical banks and cash, furthermore moving towards online banking and digital wallets. We are witnessing people get more comfortable making online payments through smartphone applications like Paytm.
